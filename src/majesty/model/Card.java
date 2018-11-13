@@ -14,6 +14,7 @@ public class Card {
 	            case Soldat: suit = "soldat"; break;
 	            case Wirt: suit = "wirt"; break;
 	            case Adlige: suit = "adlige"; break;
+	            //abc
 	            }
 	            return suit;
 	        }
