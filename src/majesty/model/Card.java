@@ -2,12 +2,12 @@ package majesty.model;
 
 public class Card {
 
-	    public enum Suit { Müllerin, Brauer, Hexe, Wachen, Soldat, Wirt, Adlige;
+	    public enum Suit { Muellerin, Brauer, Hexe, Wachen, Soldat, Wirt, Adlige;
 	        @Override
 	        public String toString() {
 	            String suit = "";
 	            switch (this) {
-	            case Müllerin: suit = "muellerin"; break;
+	            case Muellerin: suit = "muellerin"; break;
 	            case Brauer: suit = "brauer"; break;
 	            case Hexe: suit = "hexe"; break;
 	            case Wachen: suit = "wachen"; break;

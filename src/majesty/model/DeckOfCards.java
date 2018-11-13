@@ -55,7 +55,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 	    	
 	    	//Add 9 Müllerinnen to the Deck
 	        for(int i=1;i<=9;i++){
-	        	Card card = new Card(Card.Suit.Müllerin);
+	        	Card card = new Card(Card.Suit.Muellerin);
 	        	greenCards.add(card);
 	        }
 	        
@@ -105,7 +105,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 	    	
 	    	//Add 2 Müllerinnen to the Deck
 	        for(int i=1;i<=2;i++){
-	        	Card card = new Card(Card.Suit.Müllerin);
+	        	Card card = new Card(Card.Suit.Muellerin);
 	        	redCards.add(card);
 	        }
 	        
