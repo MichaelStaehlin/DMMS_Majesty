@@ -76,7 +76,7 @@ public class ClientView {
         
         root.setTop(topBox);
         
-        topBox.getChildren().addAll(lblIP, txtIP, lblPort, txtPort, lblClientName, txtClientName, male, female, btnGo);
+        topBox.getChildren().addAll( lblClientName, txtClientName, male, female, btnGo);
         txtIP.setId("IP");
         txtPort.setId("Port");
         
@@ -91,11 +91,9 @@ public class ClientView {
         txtMessages.setWrapText(true);
         */
 
-        HBox bottomBox = new HBox();
-        topBox.setId("BottomBox");
-        bottomBox.getChildren().addAll(btnHello, btnNewClient, btnGoodbye);
+       
         
-        root.setBottom(bottomBox);
+        
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add(

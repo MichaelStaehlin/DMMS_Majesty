@@ -25,20 +25,9 @@
   -fx-font-size: 12px;
 }
 
-#TopBox {
-	-fx-alignment: center;
-	-fx-spacing: 5px;
-}
 
 #BottomBox {
 	-fx-alignment: center;
 	-fx-spacing: 5px;
 }
 
-#IP {
-	-fx-pref-width: 200px;
-}
-
-#Port {
-	-fx-pref-width: 100px;
-}
