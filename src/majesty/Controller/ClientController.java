@@ -16,7 +16,7 @@ public class ClientController {
         this.model = model;
         this.view = view;
         
-        // register ourselves to listen for button clicks
+        /* register ourselves to listen for button clicks
         view.getBtnGo().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -26,6 +26,8 @@ public class ClientController {
                 view.getTxtMessages().setText("Initialized");
             }
         });
+        
+       */
 
         // register ourselves to listen for button clicks
         view.getBtnHello().setOnAction(new EventHandler<ActionEvent>() {
@@ -53,6 +55,9 @@ public class ClientController {
                 view.getTxtMessages().appendText("\nSaid 'goodbye', received: " + result);
             }
         });
+        
+        
+        
 
         // register ourselves to handle window-closing event
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {

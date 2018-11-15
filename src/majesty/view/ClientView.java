@@ -17,7 +17,23 @@ import javafx.stage.Stage;
 import majesty.model.ClientModel;
 
 public class ClientView {
-    private ClientModel model;
+    public RadioButton getMale() {
+		return male;
+	}
+
+	public void setMale(RadioButton male) {
+		this.male = male;
+	}
+
+	public RadioButton getFemale() {
+		return female;
+	}
+
+	public void setFemale(RadioButton female) {
+		this.female = female;
+	}
+
+	private ClientModel model;
     private Stage stage;
 
     protected Label lblIP = new Label("IP");
@@ -48,7 +64,7 @@ public class ClientView {
         VBox topBox = new VBox();
         topBox.setId("TopBox");
         
-        /* Könnte noch nützlich sein noch nicht löschen
+      
         Region spacer = new Region();
         Region spacer2 = new Region();
         Region spacer3 = new Region();
@@ -56,12 +72,15 @@ public class ClientView {
         HBox.setHgrow(spacer2, Priority.ALWAYS);
         HBox.setHgrow(spacer3, Priority.ALWAYS);
         root.setTop(topBox);
-        */
+        
+        
+        root.setTop(topBox);
         
         topBox.getChildren().addAll(lblIP, txtIP, lblPort, txtPort, lblClientName, txtClientName, male, female, btnGo);
         txtIP.setId("IP");
         txtPort.setId("Port");
         
+        /*
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
@@ -70,6 +89,7 @@ public class ClientView {
         root.setCenter(scrollPane);
         scrollPane.setContent(txtMessages);
         txtMessages.setWrapText(true);
+        */
 
         HBox bottomBox = new HBox();
         topBox.setId("BottomBox");
@@ -80,7 +100,7 @@ public class ClientView {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(
                 getClass().getResource("Example.css").toExternalForm());
-        stage.setScene(scene);;
+        stage.setScene(scene);
     }
     
     public void start() {
