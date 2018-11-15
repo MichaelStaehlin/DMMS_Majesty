@@ -1,4 +1,4 @@
-package Client;
+package majesty.model;
 
 import java.io.IOException;
 import java.net.Socket;

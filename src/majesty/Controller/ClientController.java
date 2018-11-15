@@ -1,4 +1,4 @@
-package Client;
+package majesty.Controller;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
