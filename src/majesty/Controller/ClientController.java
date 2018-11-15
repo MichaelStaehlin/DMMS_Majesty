@@ -4,51 +4,53 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.WindowEvent;
+import majesty.model.ClientModel;
+import majesty.view.ClientView;
 
 public class ClientController {
     
     final private ClientModel model;
     final private ClientView view;
     
-    protected ClientController(ClientModel model, ClientView view) {
+    public ClientController(ClientModel model, ClientView view) {
         this.model = model;
         this.view = view;
         
         // register ourselves to listen for button clicks
-        view.btnGo.setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnGo().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String ip = view.txtIP.getText();
-                Integer port = new Integer(view.txtPort.getText());
+                String ip = view.getTxtIP().getText();
+                Integer port = new Integer(view.getTxtPort().getText());
                 model.init(ip, port);
-                view.txtMessages.setText("Initialized");
+                view.getTxtMessages().setText("Initialized");
             }
         });
 
         // register ourselves to listen for button clicks
-        view.btnHello.setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnHello().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String result = model.sayHello(view.txtClientName.getText());
-                view.txtMessages.appendText("\nSaid 'hello', received: " + result);
+                String result = model.sayHello(view.getTxtClientName().getText());
+                view.getTxtMessages().appendText("\nSaid 'hello', received: " + result);
             }
         });
 
         // register ourselves to listen for button clicks
-        view.btnNewClient.setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnNewClient().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String result = model.sayNewClient(view.txtClientName.getText());
-                view.txtMessages.appendText("\nSaid 'new client', received: " + result);
+                String result = model.sayNewClient(view.getTxtClientName().getText());
+                view.getTxtMessages().appendText("\nSaid 'new client', received: " + result);
             }
         });
 
         // register ourselves to listen for button clicks
-        view.btnGoodbye.setOnAction(new EventHandler<ActionEvent>() {
+        view.getBtnGoodbye().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String result = model.sayGoodbye(view.txtClientName.getText());
-                view.txtMessages.appendText("\nSaid 'goodbye', received: " + result);
+                String result = model.sayGoodbye(view.getTxtClientName().getText());
+                view.getTxtMessages().appendText("\nSaid 'goodbye', received: " + result);
             }
         });
 

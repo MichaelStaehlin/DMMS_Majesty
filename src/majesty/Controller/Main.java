@@ -2,6 +2,8 @@ package majesty.Controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import majesty.model.ClientModel;
+import majesty.view.ClientView;
 
 public class Main extends Application {
     private ClientView view;
