@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
+import Commons.Message;
 import Commons.MessageType;
 import Commons.Message_Error;
 import Commons.Message_Goodbye;

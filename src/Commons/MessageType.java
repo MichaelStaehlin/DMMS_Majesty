@@ -8,6 +8,7 @@ public enum MessageType {
     Hello,
     NewCustomer,
     NewCustomerAccepted,
+    ClientDraw,
     Goodbye,
     Error;
 	
