@@ -87,19 +87,9 @@ public class ClientModel {
 		return result;
 	}
 	//Kartenlogik
-	DeckOfCards deck = new DeckOfCards(1);
+	DeckOfCards deck = new DeckOfCards(2);
 	
-	 public void addCard(Card card) {
-	    	
-
-	    	//if(cards.size() < HAND_SIZE) cards.add(new Card(Suit.Spades, Rank.King));
-	    	//if(cards.size() < HAND_SIZE) cards.add(new Card(Suit.Spades, Rank.Ten));
-	    	//if(cards.size() < HAND_SIZE) cards.add(new Card(Suit.Spades, Rank.King));
-	    	//if(cards.size() < HAND_SIZE) cards.add(new Card(Suit.Spades, Rank.Ten));
-	    	//if(cards.size() < HAND_SIZE) cards.add(new Card(Suit.Spades, Rank.King));
-	        
-	        if (cards.size() < 6) cards.add(card);
-	    }
+	
 
 	public DeckOfCards getDeck() {
 		return deck;

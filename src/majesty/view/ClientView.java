@@ -125,7 +125,7 @@ public class ClientView {
     	
     	 PlayerBoard plBoard = new PlayerBoard(deck);
     	 
-    	 //BorderPane root = new BorderPane();
+    	 
     	 Scene scene = new Scene(plBoard, 250, 250);
         
     	

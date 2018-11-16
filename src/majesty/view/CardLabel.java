@@ -8,13 +8,15 @@ import majesty.model.Card;
 public class CardLabel extends Label {
 	public CardLabel() {
 		super();
-		this.getStyleClass().add("card");
+		//this.getStyleClass().add("card");
+		this.getStylesheets().add(
+                getClass().getResource("Example.css").toExternalForm());
 	}
 
 	public void setCard(Card card) {
 		if (card != null) {
 			String fileName = cardToFileName(card);
-			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("majesty/images/characters" + fileName));
+			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("majesty/images/characters/" + fileName));
 			ImageView imv = new ImageView(image);
 			imv.fitWidthProperty().bind(this.widthProperty());
 			imv.fitHeightProperty().bind(this.heightProperty());

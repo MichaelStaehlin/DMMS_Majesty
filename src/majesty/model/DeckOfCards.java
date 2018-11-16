@@ -187,7 +187,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 	        cardsRemaining.setValue(deck.size());
 	        return card;
 	    }
-	    /*
+	    
 	    public ArrayList<Card> dealFirstDeckCards() {
 	    	ArrayList<Card> firstCards = new ArrayList<Card>();
 	    	for (int i = 0; i<5; i++) {
@@ -198,7 +198,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 	    	return firstCards;
 	        
 	    }
-	    */
+	    
 	    
 	    
 	}
