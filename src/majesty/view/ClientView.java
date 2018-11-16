@@ -14,6 +14,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import majesty.model.Card;
 import majesty.model.ClientModel;
 import majesty.model.DeckOfCards;
 
@@ -123,10 +124,27 @@ public class ClientView {
     	Stage PlayerStage = new Stage();
     	this.stage2 = PlayerStage;
     	
-    	 PlayerBoard plBoard = new PlayerBoard(deck);
+    	BorderPane root = new BorderPane();
+    	HBox hboxCards = new HBox();
+    	deck.createFinalDeck(2);
+    	 for (int i = 0; i < 6; i++) {
+ 			Card card= deck.dealCard();
+             CardLabel lblCard = new CardLabel();
+             hboxCards.getChildren().add(lblCard);
+             lblCard.setCard(card);
+ 		}
     	 
     	 
-    	 Scene scene = new Scene(plBoard, 250, 250);
+    	 root.setCenter(hboxCards);
+    	 
+    	 root.setTop(new Label("Wehe das klappt nit!"));
+    	 
+    	
+    	 
+    	 
+    	 
+    	 
+    	 Scene scene = new Scene(root, 500, 500);
         
     	
     	 PlayerStage.setScene(scene);

@@ -2,6 +2,7 @@ package majesty.view;
 
 import java.util.ArrayList;
 
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -20,21 +21,37 @@ public class PlayerBoard extends VBox{
 	
 	public PlayerBoard(DeckOfCards deck) {
 		super();
-	
+		this.getStyleClass().add("Example");
 	
 		
 		deck.createFinalDeck(2);
+		
+		hboxGebaeudeCards = new HBox();
+		
+            
+            Label £= new Label("Ficken");
+       
+            
+            
+       
+	}
+	
+	public void setPlayerBoard() {
 		ArrayList<Card> screenCards = deck.dealFirstDeckCards();
+		for (int i = 0; i < 5; i++) {
+			Label l1 = new Label(""+i);
+			
+			hboxGebaeudeCards.getChildren().add(l1);
+		}
+		
 		hboxCards = new HBox();
+		
 		for (int i = 0; i < screenCards.size(); i++) {
 			Card card= screenCards.get(i);
             CardLabel lblCard = new CardLabel();
-            
-            
             hboxCards.getChildren().add(lblCard);
-            CardLabel cl = (CardLabel) hboxCards.getChildren().get(i);
-            cl.setCard(card);
-        }
+            lblCard.setCard(card);
+		}
 	}
 		/*
 		 public void updatePlayerDisplay() {
@@ -69,3 +86,5 @@ public class PlayerBoard extends VBox{
 	
 
 }
+
+
