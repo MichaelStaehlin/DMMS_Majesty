@@ -15,6 +15,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import majesty.model.ClientModel;
+import majesty.model.DeckOfCards;
 
 public class ClientView {
     public RadioButton getMale() {
@@ -34,7 +35,7 @@ public class ClientView {
 	}
 
 	private ClientModel model;
-    private Stage stage;
+    private Stage stage1, stage2;
 
     protected Label lblIP = new Label("IP");
     
@@ -51,10 +52,11 @@ public class ClientView {
     private RadioButton male = new RadioButton("Male");
     private RadioButton female = new RadioButton("Female");
     
+    
     protected TextArea txtMessages = new TextArea();
     
     public ClientView(Stage stage, ClientModel model) {
-        this.stage = stage;
+        this.stage1 = stage;
         this.model = model;
         
         stage.setTitle("Login");
@@ -101,22 +103,52 @@ public class ClientView {
         stage.setScene(scene);
     }
     
+    public void initLobby() {
+    	
+    	Stage lobbyStage = new Stage();
+    	this.stage2 = lobbyStage;
+    	
+    	 BorderPane root = new BorderPane();
+    	 Scene scene = new Scene(root, 250, 250);
+        
+    	
+        lobbyStage.setScene(scene);
+        lobbyStage.show();
+        
+    	
+    }
+    
+    public void initPlayerBoard(DeckOfCards deck) {
+    	stage1.close();
+    	Stage PlayerStage = new Stage();
+    	this.stage2 = PlayerStage;
+    	
+    	 PlayerBoard plBoard = new PlayerBoard(deck);
+    	 
+    	 //BorderPane root = new BorderPane();
+    	 Scene scene = new Scene(plBoard, 250, 250);
+        
+    	
+    	 PlayerStage.setScene(scene);
+    	 PlayerStage.show();
+    }
+    
     public void start() {
-        stage.show();
+        stage1.show();
     }
     
     /**
      * Stopping the view - just make it invisible
      */
     public void stop() {
-        stage.hide();
+        stage1.hide();
     }
     
     /**
      * Getter for the stage, so that the controller can access window events
      */
     public Stage getStage() {
-        return stage;
+        return stage1;
     }
     
     public ClientModel getModel() {
@@ -216,6 +248,6 @@ public class ClientView {
 	}
 
 	public void setStage(Stage stage) {
-		this.stage = stage;
+		this.stage1 = stage;
 	}
 }

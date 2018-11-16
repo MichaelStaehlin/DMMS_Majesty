@@ -16,7 +16,7 @@ public class ClientController {
         this.model = model;
         this.view = view;
         
-        /* register ourselves to listen for button clicks
+       
         view.getBtnGo().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -24,10 +24,15 @@ public class ClientController {
                 Integer port = new Integer(view.getTxtPort().getText());
                 model.init(ip, port);
                 view.getTxtMessages().setText("Initialized");
+                
+                
+                view.initPlayerBoard(model.getDeck());
+                
             }
         });
         
-       */
+       
+       
 
         // register ourselves to listen for button clicks
         view.getBtnHello().setOnAction(new EventHandler<ActionEvent>() {

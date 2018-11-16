@@ -7,13 +7,13 @@ public class Card {
 	        public String toString() {
 	            String suit = "";
 	            switch (this) {
-	            case Muellerin: suit = "muellerin"; break;
-	            case Brauer: suit = "brauer"; break;
-	            case Hexe: suit = "hexe"; break;
-	            case Wachen: suit = "wachen"; break;
-	            case Soldat: suit = "soldat"; break;
-	            case Wirt: suit = "wirt"; break;
-	            case Adlige: suit = "adlige"; break;
+	            case Muellerin: suit = "Muellerin"; break;
+	            case Brauer: suit = "Brauer"; break;
+	            case Hexe: suit = "Hexe"; break;
+	            case Wachen: suit = "Wachen"; break;
+	            case Soldat: suit = "Soldat"; break;
+	            case Wirt: suit = "Wirt"; break;
+	            case Adlige: suit = "Adlige"; break;
 	            }
 	            return suit;
 	        }
