@@ -12,7 +12,7 @@ import majesty.model.DeckOfCards;
 
 public class PlayerBoard extends VBox{
 	
-	private HBox hboxCards, hboxGebäudeCards;
+	private HBox hboxCards, hboxGebaeudeCards;
 	private DeckOfCards deck = new DeckOfCards(2);
 	
 	private ArrayList<Card> screenCards;
