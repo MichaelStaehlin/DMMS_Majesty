@@ -26,6 +26,7 @@ public class ClientController {
                 view.getTxtMessages().setText("Initialized");
                 
                 
+                
                 view.initPlayerBoard(model.getDeck());
                 
             }
