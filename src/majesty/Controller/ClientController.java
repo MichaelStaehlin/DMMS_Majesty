@@ -1,15 +1,21 @@
 package majesty.Controller;
 
+import Server.ServerModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import majesty.model.ClientModel;
 import majesty.view.ClientView;
 
 public class ClientController {
     
-    final private ClientModel model;
+    protected static final int NUM_OF_CLIENTS = 2;
+	final private ClientModel model;
     final private ClientView view;
     
     public ClientController(ClientModel model, ClientView view) {
@@ -25,11 +31,16 @@ public class ClientController {
                 model.init(ip, port);
                 view.getTxtMessages().setText("Initialized");
                 
+                //Hier soll ein Splash Screen rein
+                
+                view.initLoadingScreen();
+                		
                 
                 
+                //Spiel startet..
                 view.initPlayerBoard(model.getDeck());
-                
             }
+            
         });
         
        

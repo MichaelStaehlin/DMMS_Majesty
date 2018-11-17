@@ -39,9 +39,23 @@ public class Card {
             
 	    };
 	    
+	    public enum LoadScreen {majesty;
+	    	 public String toString() {
+		            String suit = "";
+		            switch (this) {
+		            
+		            case majesty: suit = "majesty"; break;
+		           
+		            }
+		            return suit;
+		        }
+           
+	    };
+	    
 	    
 	    private  Suit suit;
 	    private Locations location;
+	    private LoadScreen ls;
 	    
 	    public Card(Locations loc) {
 	    	location= loc;
@@ -51,9 +65,19 @@ public class Card {
 	        this.suit = suit;
 	    }
 	    
-	    
+	    public Card(LoadScreen ls) {
+	        this.ls = ls;
+	    }
 
 	   
+
+		public LoadScreen getLs() {
+			return ls;
+		}
+
+		public void setLs(LoadScreen ls) {
+			this.ls = ls;
+		}
 
 		public Suit getSuit() {
 	        return suit;

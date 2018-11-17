@@ -1,5 +1,8 @@
 package majesty.view;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.tools.DocumentationTool.Location;
 
 import javafx.geometry.Insets;
@@ -19,6 +22,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import majesty.model.Card;
+import majesty.model.Card.LoadScreen;
 import majesty.model.Card.Locations;
 import majesty.model.Card.Suit;
 import majesty.model.ClientModel;
@@ -42,7 +46,7 @@ public class ClientView {
 	}
 
 	private ClientModel model;
-    private Stage stage1, stage2;
+    private Stage stage1, stage2, stage3;
 
     protected Label lblIP = new Label("IP");
     
@@ -58,6 +62,7 @@ public class ClientView {
     protected Button btnGoodbye = new Button("Goodbye");
     private RadioButton male = new RadioButton("Male");
     private RadioButton female = new RadioButton("Female");
+    private Timer tm= new Timer();
     
     
     protected TextArea txtMessages = new TextArea();
@@ -110,25 +115,42 @@ public class ClientView {
         stage.setScene(scene);
     }
     
-    public void initLobby() {
+    public void initLoadingScreen() {
     	
+    	this.stage1.close();
     	Stage lobbyStage = new Stage();
     	this.stage2 = lobbyStage;
+    	Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+            	
+               Card majesty = new Card(LoadScreen.majesty);
+    	CardLabel lblMajesty = new CardLabel();
+    	lblMajesty.setLoadScreen(majesty);
     	
     	 BorderPane root = new BorderPane();
+    	 root.setCenter(lblMajesty);
     	 Scene scene = new Scene(root, 250, 250);
         
     	
         lobbyStage.setScene(scene);
         lobbyStage.show();
+            }
+        }, 0, 5000);
+    	
+    	
+    	
+     
         
     	
     }
     
     public void initPlayerBoard(DeckOfCards deck) {
-    	stage1.close();
+    	stage2.close();
     	Stage PlayerStage = new Stage();
-    	this.stage2 = PlayerStage;
+    	this.stage3 = PlayerStage;
     	
     	BorderPane root = new BorderPane();
     	HBox hboxCards = new HBox();
