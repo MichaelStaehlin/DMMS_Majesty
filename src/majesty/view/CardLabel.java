@@ -33,5 +33,28 @@ public class CardLabel extends Label {
 		String suit = card.getSuit().toString();
 		return  suit + ".jpg";
 	}
+	
+	public void setLocationCard(Card card) {
+		if (card != null) {
+			String fileName = locationCardToFileName(card);
+			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("majesty/images/locations/" + fileName));
+			ImageView imv = new ImageView(image);
+			imv.fitWidthProperty().bind(this.widthProperty());
+			imv.fitHeightProperty().bind(this.heightProperty());
+			imv.setPreserveRatio(true);
+			this.setGraphic(imv);
+		} else {
+			this.setGraphic(null);
+		}
+		
+		
+	}
+	
+private String locationCardToFileName(Card card) {
+		
+		String Location = card.getLocation().toString();
+		return  Location + ".jpg";
+	}
+	
 
 }

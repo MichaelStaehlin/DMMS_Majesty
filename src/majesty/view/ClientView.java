@@ -1,5 +1,8 @@
 package majesty.view;
 
+import javax.tools.DocumentationTool.Location;
+
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,12 +12,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import majesty.model.Card;
+import majesty.model.Card.Locations;
+import majesty.model.Card.Suit;
 import majesty.model.ClientModel;
 import majesty.model.DeckOfCards;
 
@@ -127,17 +133,74 @@ public class ClientView {
     	BorderPane root = new BorderPane();
     	HBox hboxCards = new HBox();
     	deck.createFinalDeck(2);
-    	 for (int i = 0; i < 6; i++) {
+    	 for (int i = 0; i < 2; i++) {
  			Card card= deck.dealCard();
              CardLabel lblCard = new CardLabel();
-             hboxCards.getChildren().add(lblCard);
              lblCard.setCard(card);
+             hboxCards.getChildren().add(lblCard);
+             
  		}
     	 
     	 
     	 root.setCenter(hboxCards);
     	 
-    	 root.setTop(new Label("Wehe das klappt nit!"));
+    	 GridPane score = new GridPane();
+    	 score.add(new Label("Rang"),0,0);
+    	 score.add(new Label("Spielername"),1,0);
+    	 score.add(new Label("Gold"),2,0);
+    	 
+    	 //Zahl wird später durch Spieleranzahl ersetzt solange nur 2 Spieler = egal
+    	 for (int i = 0; i < 1; i++) {
+    		 score.add(new Label(""+i+1),0,i+1);
+    		 score.add(new Label(""),1, i+1);
+    		 score.add(new Label(""+0),2,i+1);
+    	 }
+    	 
+    	 for (int i = 0; i < 6; i++) {
+  			Card card= deck.dealCard();
+              CardLabel lblCard = new CardLabel();
+              hboxCards.getChildren().add(lblCard);
+              lblCard.setCard(card);
+  		}
+    	 
+    	Card muehle = new Card(Locations.Muehle);
+    	CardLabel lblMuehle = new CardLabel();
+    	lblMuehle.setLocationCard(muehle);
+    	
+    	Card taverne = new Card(Locations.Taverne);
+    	CardLabel lblTaverne = new CardLabel();
+    	lblTaverne.setLocationCard(taverne);
+    	
+    	Card hexenhaus = new Card(Locations.Hexenhaus);
+    	CardLabel lblHexenhaus = new CardLabel();
+    	lblHexenhaus.setLocationCard(hexenhaus);
+    	
+    	Card kaserne = new Card(Locations.Kaserne);
+    	CardLabel lblKaserne = new CardLabel();
+    	lblKaserne.setLocationCard(kaserne);
+    	
+    	Card schloss = new Card(Locations.Schloss);
+    	CardLabel lblSchloss = new CardLabel();
+    	lblSchloss.setLocationCard(schloss);
+    	
+    	Card wachturm = new Card(Locations.Wachturm);
+    	CardLabel lblWachturm = new CardLabel();
+    	lblWachturm.setLocationCard(wachturm);
+    	
+    	Card lazarett = new Card(Locations.Lazarett);
+    	CardLabel lblLazarett = new CardLabel();
+    	lblLazarett.setLocationCard(lazarett);
+    	
+    	HBox locations = new HBox();
+    	locations.getChildren().addAll(lblMuehle,lblTaverne,lblHexenhaus,lblKaserne,lblSchloss,lblWachturm,lblLazarett);
+   
+    	root.setBottom(locations);
+    	
+    	
+    	
+    	
+    	 
+    	 root.setTop(score);
     	 
     	
     	 

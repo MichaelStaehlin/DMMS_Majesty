@@ -14,18 +14,48 @@ public class Card {
 	            case Soldat: suit = "Soldat"; break;
 	            case Wirt: suit = "Wirt"; break;
 	            case Adlige: suit = "Adlige"; break;
+	           
 	            }
 	            return suit;
 	        }
 	    };
 	    
-	    private final Suit suit;
+	    public enum Locations {Brauerei, Hexenhaus, Kaserne, Lazarett, Muehle, Schloss, Taverne, Wachturm;
+	    	 public String toString() {
+		            String suit = "";
+		            switch (this) {
+		            
+		            case Brauerei: suit = "Brauerei"; break;
+		            case Hexenhaus: suit = "Hexenhaus"; break;
+		            case Kaserne: suit = "Kaserne"; break;
+		            case Lazarett: suit = "Lazarett"; break;
+		            case Muehle: suit = "Muehle"; break;
+		            case Schloss: suit = "Schloss"; break;
+		            case Taverne: suit = "Taverne"; break;
+		            case Wachturm: suit = "Wachturm"; break;
+		            }
+		            return suit;
+		        }
+            
+	    };
+	    
+	    
+	    private  Suit suit;
+	    private Locations location;
+	    
+	    public Card(Locations loc) {
+	    	location= loc;
+	    }
 	    
 	    public Card(Suit suit) {
 	        this.suit = suit;
 	    }
+	    
+	    
 
-	    public Suit getSuit() {
+	   
+
+		public Suit getSuit() {
 	        return suit;
 	    }
 
@@ -33,5 +63,13 @@ public class Card {
 	    public String toString() {
 	        return suit.toString();
 	    }
+
+		public Locations getLocation() {
+			return location;
+		}
+
+		public void setLocation(Locations location) {
+			this.location = location;
+		}
 	
 }
