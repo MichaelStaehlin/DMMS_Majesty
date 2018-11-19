@@ -1,16 +1,28 @@
-package Client;
+package majesty.model;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import Commons.Message;
 import Commons.Message_Goodbye;
 import Commons.Message_Hello;
 import Commons.Message_NewCustomer;
 
+
 public class ClientModel {
     String ipAddress;
     Integer port;
+    ArrayList<String> playerList = new ArrayList<String>();
+    
+
+	public ArrayList<String> getPlayerList() {
+		return playerList;
+	}
+
+	public void setPlayerList(ArrayList<String> playerList) {
+		this.playerList = playerList;
+	}
 
 	public void init(String ipAddress, Integer port) {
 	    this.ipAddress = ipAddress;
@@ -82,4 +94,17 @@ public class ClientModel {
         }
 		return result;
 	}
+	//Kartenlogik
+	DeckOfCards deck = new DeckOfCards(2);
+	
+	
+
+	public DeckOfCards getDeck() {
+		return deck;
+	}
+
+	public void setDeck(DeckOfCards deck) {
+		this.deck = deck;
+	}
+	
 }

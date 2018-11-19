@@ -3,14 +3,14 @@
   -fx-font-size: 16px;
   -fx-font-weight: bold;
   -fx-text-fill: #0000C0;
-  -fx-alignment: center-right;
+  
 }
 
 .text-field {
   -fx-font-size: 16px;
   -fx-font-weight: bold;
   -fx-text-fill: #000000;
-  -fx-alignment: center-left;
+  
 }
 
 .button {
@@ -25,20 +25,23 @@
   -fx-font-size: 12px;
 }
 
-#TopBox {
-	-fx-alignment: center;
-	-fx-spacing: 5px;
-}
 
 #BottomBox {
 	-fx-alignment: center;
 	-fx-spacing: 5px;
 }
 
-#IP {
-	-fx-pref-width: 200px;
+.card {
+  -fx-font-size: 18px;
+	-fx-padding: 2.0px;
+    -fx-border-color: black;
+    -fx-border-width: 1.0px;
+	-fx-background-color: lemonchiffon;
+    -fx-min-width: 50;
+    -fx-pref-width: 111;
+    -fx-max-width: 500;
+    -fx-min-height: 80;
+    -fx-pref-height: 162;
+    -fx-max-height: 800;
 }
 
-#Port {
-	-fx-pref-width: 100px;
-}

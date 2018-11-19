@@ -1,14 +1,19 @@
-package Client;
+package majesty.Controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import majesty.model.ClientModel;
+import majesty.view.ClientView;
 
-public class Client extends Application {
+public class Main extends Application {
     private ClientView view;
     private ClientController controller;
     private ClientModel model;
+   
 
-    public static void main(String[] args) {
+	
+
+	public static void main(String[] args) {
         launch(args);
     }
 

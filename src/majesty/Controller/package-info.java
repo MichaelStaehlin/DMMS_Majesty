@@ -5,4 +5,4 @@
  * @author micha
  *
  */
-package Client;
+package majesty.Controller;
