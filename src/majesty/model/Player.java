@@ -276,16 +276,131 @@ public class Player {
 	}
 	
 	public void bonusMostCharactersPerLocation(){
-		int idMostMuellerin;
-		int idMostBrauer;
-		int idMostHexe;
-		int idMostWache;
-		int idMostSoldat;
-		int idMostWirt;
-		int idMostAdlige;
+		ArrayList<Integer> idMostMuellerin = new ArrayList<Integer>();
+		ArrayList<Integer> idMostBrauer = new ArrayList<Integer>();
+		ArrayList<Integer> idMostHexe = new ArrayList<Integer>();
+		ArrayList<Integer> idMostWache = new ArrayList<Integer>();
+		ArrayList<Integer> idMostSoldat = new ArrayList<Integer>();
+		ArrayList<Integer> idMostWirt = new ArrayList<Integer>();
+		ArrayList<Integer> idMostAdlige = new ArrayList<Integer>();
+		int mostMuellerin = -1;
+		int mostBrauer = -1;
+		int mostHexe = -1;
+		int mostWache = -1;
+		int mostSoldat = -1;
+		int mostWirt = -1;
+		int mostAdlige = -1;
 		
 		for(int i = 0; i < players.size(); i++){
-			
+			if(players.get(i).muellerin.size()>=mostMuellerin){
+				mostMuellerin = players.get(i).muellerin.size();
+				if(players.get(i).muellerin.size()>mostMuellerin){
+					idMostMuellerin.clear();
+					idMostMuellerin.add(i);
+				}else{
+					idMostMuellerin.add(i);
+				}
+			}
+		}
+		
+		for(int i = 0; i < players.size(); i++){
+			if(players.get(i).brauer.size()>=mostBrauer){
+				mostBrauer = players.get(i).brauer.size();
+				if(players.get(i).brauer.size()>mostBrauer){
+					idMostBrauer.clear();
+					idMostBrauer.add(i);
+				}else{
+					idMostBrauer.add(i);
+				}
+			}
+		}
+		
+		for(int i = 0; i < players.size(); i++){
+			if(players.get(i).hexe.size()>=mostHexe){
+				mostHexe = players.get(i).hexe.size();
+				if(players.get(i).hexe.size()>mostHexe){
+					idMostHexe.clear();
+					idMostHexe.add(i);
+				}else{
+					idMostHexe.add(i);
+				}
+			}
+		}
+		
+		for(int i = 0; i < players.size(); i++){
+			if(players.get(i).wache.size()>=mostWache){
+				mostWache = players.get(i).wache.size();
+				if(players.get(i).wache.size()>mostWache){
+					idMostWache.clear();
+					idMostWache.add(i);
+				}else{
+					idMostWache.add(i);
+				}
+			}
+		}
+		
+		for(int i = 0; i < players.size(); i++){
+			if(players.get(i).soldat.size()>=mostSoldat){
+				mostSoldat = players.get(i).soldat.size();
+				if(players.get(i).soldat.size()>mostSoldat){
+					idMostSoldat.clear();
+					idMostSoldat.add(i);
+				}else{
+					idMostSoldat.add(i);
+				}
+			}
+		}
+		
+		for(int i = 0; i < players.size(); i++){
+			if(players.get(i).wirt.size()>=mostWirt){
+				mostWirt = players.get(i).muellerin.size();
+				if(players.get(i).wirt.size()>mostWirt){
+					idMostWirt.clear();
+					idMostWirt.add(i);
+				}else{
+					idMostWirt.add(i);
+				}
+			}
+		}
+		
+		for(int i = 0; i < players.size(); i++){
+			if(players.get(i).adlige.size()>=mostAdlige){
+				mostAdlige = players.get(i).adlige.size();
+				if(players.get(i).adlige.size()>mostAdlige){
+					idMostAdlige.clear();
+					idMostAdlige.add(i);
+				}else{
+					idMostAdlige.add(i);
+				}
+			}
+		}
+		
+		for(int i : idMostMuellerin){
+			players.get(i).addGold(10);
+		}
+		
+		for(int i : idMostBrauer){
+			players.get(i).addGold(11);
+		}
+		
+		for(int i : idMostHexe){
+			players.get(i).addGold(12);
+		}
+		
+		for(int i : idMostWache){
+			players.get(i).addGold(13);
+		}
+		
+		for(int i : idMostSoldat){
+			players.get(i).addGold(14);
+		}
+		
+		for(int i : idMostWirt){
+			players.get(i).addGold(15);
+		}
+		
+		for(int i : idMostAdlige){
+			players.get(i).addGold(16);
 		}
 	}
 
