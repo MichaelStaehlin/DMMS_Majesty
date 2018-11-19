@@ -1,0 +1,295 @@
+package majesty.model;
+
+import java.util.ArrayList;
+
+public class Player {
+
+	private String ipAddress;
+	private int port;
+	private int gold;	
+	private int playerID;
+	private int numOfPlayers;
+	private String playerName;
+	ArrayList<Player> players;
+	ArrayList<Integer> muellerin;
+	ArrayList<Integer> brauer;
+	ArrayList<Integer> hexe;
+	ArrayList<Integer> wache;
+	ArrayList<Integer> soldat;
+	ArrayList<Integer> wirt;
+	ArrayList<Integer> adlige;
+	ArrayList<Integer> lazarett;
+	DeckOfCards deck;
+
+	public Player(String ipAddress, int port, int playerID, String playerName){
+		this.ipAddress = ipAddress;
+		this.port = port;
+		this.playerID = playerID;
+		this.playerName = playerName;
+		this.gold = 0;
+		
+		//naechste 3 Zeilen werden spaeter von Server gesetzt
+		this.deck = new DeckOfCards(2);
+		this.numOfPlayers = 2;
+		this.players = new ArrayList<Player>();
+		
+		this.muellerin = new ArrayList<Integer>();
+		this.brauer = new ArrayList<Integer>();
+		this.hexe = new ArrayList<Integer>();
+		this.wache = new ArrayList<Integer>();
+		this.soldat = new ArrayList<Integer>();
+		this.wirt = new ArrayList<Integer>();
+		this.adlige = new ArrayList<Integer>();
+		this.lazarett = new ArrayList<Integer>();
+		
+		//naechste Zeile wird geloescht
+		players.add(this);
+		
+	}
+	
+	public DeckOfCards getDeck(int playerID){
+		return players.get(playerID).deck;
+	}
+	
+	public int getNumberOfMuellerin(int playerID){
+		return players.get(playerID).muellerin.size();
+	}
+	
+	public int getNumberOfBrauer(int playerID){
+		return players.get(playerID).brauer.size();
+	}
+	
+	public int getNumberOfHexe(int playerID){
+		return players.get(playerID).hexe.size();
+	}
+	
+	public int getNumberOfWachen(int playerID){
+		return players.get(playerID).wache.size();
+	}
+	
+	public int getNumberOfSoldat(int playerID){
+		return players.get(playerID).soldat.size();
+	}
+	
+	public int getNumberOfWirt(int playerID){
+		return players.get(playerID).wirt.size();
+	}
+	
+	public int getNumberOfAdlige(int playerID){
+		return players.get(playerID).adlige.size();
+	}
+	
+	public void addGold(int amount){
+		this.gold += amount;
+	}
+	
+	public void mePickCard(int index, int currentActivePlayer){
+		int pickedCardOrdinal = getDeck(0).getCardOrdinalByIndex(index);
+		
+		if(pickedCardOrdinal == 0){
+			players.get(currentActivePlayer).muellerin.add(0);
+			players.get(currentActivePlayer).gold += players.get(currentActivePlayer).muellerin.size()*2;
+		}
+
+		if(pickedCardOrdinal == 1){
+			players.get(currentActivePlayer).brauer.add(1);
+			players.get(currentActivePlayer).gold += players.get(currentActivePlayer).brauer.size()*2;
+		}
+
+		if(pickedCardOrdinal == 2){
+			players.get(currentActivePlayer).hexe.add(2);
+			if(players.get(currentActivePlayer).muellerin.size()>=1 && players.get(currentActivePlayer).brauer.size()>=1 && players.get(currentActivePlayer).hexe.size()>=1){
+				players.get(currentActivePlayer).gold +=gold += 2;
+			}
+			if(players.get(currentActivePlayer).muellerin.size()>=2 && players.get(currentActivePlayer).brauer.size()>=2 && players.get(currentActivePlayer).hexe.size()>=2){
+				players.get(currentActivePlayer).gold += 4;
+			}
+			if(players.get(currentActivePlayer).muellerin.size()>=3 && players.get(currentActivePlayer).brauer.size()>=3 && players.get(currentActivePlayer).hexe.size()>=3){
+				players.get(currentActivePlayer).gold += 6;
+			}
+			if(players.get(currentActivePlayer).muellerin.size()>=4 && players.get(currentActivePlayer).brauer.size()>=4 && players.get(currentActivePlayer).hexe.size()>=4){
+				players.get(currentActivePlayer).gold += 8;
+			}
+			heal(currentActivePlayer);
+		}
+		
+		if(pickedCardOrdinal == 3){
+			players.get(currentActivePlayer).wache.add(3);
+			if(players.get(currentActivePlayer).wache.size()>=1 && players.get(currentActivePlayer).soldat.size()>=1 && players.get(currentActivePlayer).wirt.size()>=1){
+				players.get(currentActivePlayer).gold += 2;
+			}
+			if(players.get(currentActivePlayer).wache.size()>=2 && players.get(currentActivePlayer).soldat.size()>=2 && players.get(currentActivePlayer).wirt.size()>=2){
+				players.get(currentActivePlayer).gold += 4;
+			}
+			if(players.get(currentActivePlayer).wache.size()>=3 && players.get(currentActivePlayer).soldat.size()>=3 && players.get(currentActivePlayer).wirt.size()>=3){
+				players.get(currentActivePlayer).gold += 6;
+			}
+			if(players.get(currentActivePlayer).wache.size()>=4 && players.get(currentActivePlayer).soldat.size()>=4 && players.get(currentActivePlayer).wirt.size()>=4){
+				players.get(currentActivePlayer).gold += 8;
+			}
+		}
+
+		if(pickedCardOrdinal == 4){
+			players.get(currentActivePlayer).soldat.add(4);
+			players.get(currentActivePlayer).gold += players.get(currentActivePlayer).soldat.size()*3;
+		}
+
+		if(pickedCardOrdinal == 5){
+			players.get(currentActivePlayer).wirt.add(5);
+			players.get(currentActivePlayer).gold += players.get(currentActivePlayer).wirt.size()*4;
+		}
+
+		if(pickedCardOrdinal == 6){
+			players.get(currentActivePlayer).adlige.add(6);
+			players.get(currentActivePlayer).gold+= players.get(currentActivePlayer).adlige.size()*5;
+		}
+		
+		//UPDATE GUI
+		
+		otherPickCard(index, currentActivePlayer);
+
+	}
+	
+	public void otherPickCard(int index, int currentActivePlayer){
+		int pickedCardOrdinal = getDeck(0).getCardOrdinalByIndex(index);
+		players.get(playerID).deck.removeCardByIndex(index);
+			for(Player p : players){
+				if(pickedCardOrdinal == 1){
+					if(this.muellerin.size()>=1){
+						p.addGold(2);
+					}
+				} 
+				if(pickedCardOrdinal == 4){
+					attack(currentActivePlayer);
+				}
+				if(pickedCardOrdinal == 5){
+					if(brauer.size()>=1){
+						p.addGold(3);
+					}
+				}
+			}
+			
+		//UPDATE GUI
+
+	}
+	
+	public void attack(int currentActivePlayer){
+		for(int i = 0; i < players.size(); i++){
+			if(i != currentActivePlayer){
+					if(players.get(i).getNumberOfWachen(i) < players.get(currentActivePlayer).getNumberOfSoldat(currentActivePlayer)){
+						moveToLazarett(i);
+					}
+			}
+		}
+
+	}
+	
+	public void moveToLazarett(int playerID){
+		if(players.get(playerID).getNumberOfMuellerin(playerID) > 0){
+			players.get(playerID).muellerin.remove(0);
+			players.get(playerID).lazarett.add(0);
+		}else{
+			if(players.get(playerID).getNumberOfBrauer(playerID) > 0){
+				players.get(playerID).brauer.remove(0);
+				players.get(playerID).lazarett.add(1);
+			}else{
+				if(players.get(playerID).getNumberOfHexe(playerID) > 0){
+					players.get(playerID).hexe.remove(0);
+					players.get(playerID).lazarett.add(2);
+				}else{
+					if(players.get(playerID).getNumberOfWachen(playerID) > 0){
+						players.get(playerID).wache.remove(0);
+						players.get(playerID).lazarett.add(3);
+					}else{
+						if(players.get(playerID).getNumberOfSoldat(playerID) > 0){
+							players.get(playerID).soldat.remove(0);
+							players.get(playerID).lazarett.add(4);
+						}else{
+							if(players.get(playerID).getNumberOfWirt(playerID) > 0){
+								players.get(playerID).wirt.remove(0);
+								players.get(playerID).lazarett.add(5);
+							}else{
+								if(players.get(playerID).getNumberOfAdlige(playerID) > 0){
+									players.get(playerID).adlige.remove(0);
+									players.get(playerID).lazarett.add(6);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public void heal(int playerID){
+		if(players.get(playerID).lazarett.size() > 0){
+			int value = players.get(playerID).lazarett.get(0);
+			switch (value){
+				case 0:	players.get(playerID).muellerin.add(value);
+						break;
+				case 1:	players.get(playerID).brauer.add(value);
+						break;
+				case 2:	players.get(playerID).hexe.add(value);
+						break;
+				case 3:	players.get(playerID).wache.add(value);
+						break;
+				case 4:	players.get(playerID).soldat.add(value);
+						break;
+				case 5:	players.get(playerID).wirt.add(value);
+						break;
+				case 6:	players.get(playerID).adlige.add(value);
+						break;
+			}
+			players.get(playerID).lazarett.remove(0);
+		}
+	}
+
+	public void malusForLazarett(){
+		for(Player p : players){
+			if(this.lazarett.size() > 0){
+				this.gold -= this.lazarett.size();
+			}
+		}
+	}
+	
+	public void bonusDifferentCharacters(){
+		for(Player p : players){
+			int bonus = 0;
+			
+			if(this.muellerin.size()>0)
+				bonus += 1;
+			if(this.brauer.size()>0)
+				bonus += 1;
+			if(this.hexe.size()>0)
+				bonus += 1;
+			if(this.wache.size()>0)
+				bonus += 1;
+			if(this.soldat.size()>0)
+				bonus += 1;
+			if(this.wirt.size()>0)
+				bonus += 1;
+			if(this.adlige.size()>0)
+				bonus += 1;
+			
+			this.addGold(bonus*bonus);
+		}
+	}
+	
+	public void bonusMostCharactersPerLocation(){
+		int idMostMuellerin;
+		int idMostBrauer;
+		int idMostHexe;
+		int idMostWache;
+		int idMostSoldat;
+		int idMostWirt;
+		int idMostAdlige;
+		
+		for(int i = 0; i < players.size(); i++){
+			
+		}
+	}
+
+	
+	
+	
+}

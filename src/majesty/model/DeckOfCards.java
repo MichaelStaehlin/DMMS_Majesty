@@ -48,6 +48,19 @@ import javafx.beans.property.SimpleIntegerProperty;
 	    public int getCardsRemaining() {
 	    	return cardsRemaining.get();
 	    }
+	    
+	    public int getCardOrdinalByIndex(int index){
+	    	return this.deck.get(index).getSuit().ordinal();
+	    }
+	    
+	    public void removeCardByIndex(int index){
+	    	this.deck.remove(index);
+	    }
+	    
+	    public Card getCardByIndex(int index){
+	    	return this.deck.get(index);
+	    }
+	    
 	    //Creates a deck of green Cards and shuffles them.
 	    public void shuffleGreenCards(){
 	    	
