@@ -120,7 +120,7 @@ public class ClientView {
     	this.stage1.close();
     	Stage lobbyStage = new Stage();
     	this.stage2 = lobbyStage;
-    	Timer timer = new Timer();
+    	/*Timer timer = new Timer();
         timer.schedule(new TimerTask() {
 
             @Override
@@ -138,7 +138,16 @@ public class ClientView {
         lobbyStage.setScene(scene);
         lobbyStage.show();
             }
-        }, 0, 5000);
+        }, 5000, 5000);
+      */
+        Label splash = new Label();
+   	 BorderPane root = new BorderPane();
+	 root.setCenter(splash);
+	 Scene scene = new Scene(root, 250, 250);
+    
+	
+    lobbyStage.setScene(scene);
+    lobbyStage.show();
     	
     	
     	

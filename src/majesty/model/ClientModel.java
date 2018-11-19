@@ -13,8 +13,16 @@ import Commons.Message_NewCustomer;
 public class ClientModel {
     String ipAddress;
     Integer port;
+    ArrayList<String> playerList = new ArrayList<String>();
     
-    
+
+	public ArrayList<String> getPlayerList() {
+		return playerList;
+	}
+
+	public void setPlayerList(ArrayList<String> playerList) {
+		this.playerList = playerList;
+	}
 
 	public void init(String ipAddress, Integer port) {
 	    this.ipAddress = ipAddress;

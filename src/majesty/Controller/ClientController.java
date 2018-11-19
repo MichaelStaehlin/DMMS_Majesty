@@ -32,14 +32,13 @@ public class ClientController {
                 view.getTxtMessages().setText("Initialized");
                 
                 //Hier soll ein Splash Screen rein
-                
-                view.initLoadingScreen();
-                		
-                
-                
-                //Spiel startet..
-                view.initPlayerBoard(model.getDeck());
+               
+                while(model.getPlayerList().size()<2) {
+                	 view.initLoadingScreen();
+                }
             }
+            
+            
             
         });
         
