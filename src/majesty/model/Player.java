@@ -1,8 +1,10 @@
 package majesty.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
-public class Player {
+public class Player implements Comparable<Player>{
 
 	private String ipAddress;
 	private int port;
@@ -45,6 +47,10 @@ public class Player {
 		//naechste Zeile wird geloescht
 		players.add(this);
 		
+	}
+	
+	public int getGold(){
+		return this.gold;
 	}
 	
 	public DeckOfCards getDeck(int playerID){
@@ -402,6 +408,22 @@ public class Player {
 		for(int i : idMostAdlige){
 			players.get(i).addGold(16);
 		}
+	}
+	
+	public void evaluateWinner(){
+		//Copy actual list of Player to avoid problems with the GUI, which bases on list players
+		ArrayList<Player> playersCopy = new ArrayList<Player>(players);
+		Collections.sort(playersCopy);
+		
+		//Liste playersCopy sollte nun angezeigt werden -> Damir/Suvi
+		
+	}
+
+	@Override
+	public int compareTo(Player otherPlayer) {
+		int compareGold=((Player)otherPlayer).getGold();
+        /* For Ascending order*/
+        return this.gold-compareGold;
 	}
 
 	
