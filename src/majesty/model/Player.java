@@ -252,8 +252,8 @@ public class Player implements Comparable<Player>{
 
 	public void malusForLazarett(){
 		for(Player p : players){
-			if(this.lazarett.size() > 0){
-				this.gold -= this.lazarett.size();
+			if(p.lazarett.size() > 0){
+				p.gold -= p.lazarett.size();
 			}
 		}
 	}
@@ -262,22 +262,22 @@ public class Player implements Comparable<Player>{
 		for(Player p : players){
 			int bonus = 0;
 			
-			if(this.muellerin.size()>0)
+			if(p.muellerin.size()>0)
 				bonus += 1;
-			if(this.brauer.size()>0)
+			if(p.brauer.size()>0)
 				bonus += 1;
-			if(this.hexe.size()>0)
+			if(p.hexe.size()>0)
 				bonus += 1;
-			if(this.wache.size()>0)
+			if(p.wache.size()>0)
 				bonus += 1;
-			if(this.soldat.size()>0)
+			if(p.soldat.size()>0)
 				bonus += 1;
-			if(this.wirt.size()>0)
+			if(p.wirt.size()>0)
 				bonus += 1;
-			if(this.adlige.size()>0)
+			if(p.adlige.size()>0)
 				bonus += 1;
 			
-			this.addGold(bonus*bonus);
+			p.addGold(bonus*bonus);
 		}
 	}
 	
