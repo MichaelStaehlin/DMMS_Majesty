@@ -81,11 +81,13 @@ public class ServerModel {
 			URL myURL = new URL("http://checkip.amazonaws.com");
 		BufferedReader in = new BufferedReader(new InputStreamReader(myURL.openStream()));
 		ip = Integer.parseInt(in.readLine());
+		System.out.println("ihne mit der Ip"+ip);
+		return ip;
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		System.out.println("ihne mit der Ip"+ip);
 		return ip;
+		
 	}
 	
     

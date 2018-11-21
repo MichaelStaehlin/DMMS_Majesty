@@ -51,7 +51,7 @@ public class ClientView {
     protected Label lblIP = new Label("IP");
     
 
-	protected TextField txtIP = new TextField("127.0.0.1");
+	protected TextField txtIP = new TextField();
     protected Label lblPort = new Label("Port");
     protected TextField txtPort = new TextField("2303");
     protected Label lblClientName = new Label("Client name");
