@@ -1,7 +1,10 @@
 package Server;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -65,6 +68,26 @@ public class ServerModel {
 	public void setFirstnum(int firstnum) {
 		this.firstnum = firstnum;
 	}
+	
+	/**
+	 * 
+	 * @return ip
+	 * @Source https://stackoverflow.com/questions/2939218/getting-the-external-ip-adress-in-java
+	 */
+	public Integer getExternalID() {
+		Integer ip=0;
+		try {
+			
+			URL myURL = new URL("http://checkip.amazonaws.com");
+		BufferedReader in = new BufferedReader(new InputStreamReader(myURL.openStream()));
+		ip = Integer.parseInt(in.readLine());
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		System.out.println("ihne mit der Ip"+ip);
+		return ip;
+	}
+	
     
     
 }
