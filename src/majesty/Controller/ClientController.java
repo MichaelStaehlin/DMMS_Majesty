@@ -27,7 +27,7 @@ public class ClientController {
             @Override
             public void handle(ActionEvent event) {
                 String ip = view.getTxtIP().getText();
-                Integer port = new Integer(model.getExternalID());
+                Integer port = new Integer(8080);
         	System.out.println("Client"+port);
                 
                 model.init(ip, port);
@@ -35,7 +35,7 @@ public class ClientController {
                 
                 //Hier soll ein Splash Screen rein
                
-                while(model.getPlayerList().size()<2) {
+                if(model.getPlayerList().size()<2) {
                 	 view.initLoadingScreen();
                 }
             }
