@@ -27,7 +27,9 @@ public class ClientController {
             @Override
             public void handle(ActionEvent event) {
                 String ip = view.getTxtIP().getText();
-                Integer port = new Integer(view.getTxtPort().getText());
+                Integer port = new Integer(model.getExternalID());
+        	System.out.println("Client"+port);
+                
                 model.init(ip, port);
                 view.getTxtMessages().setText("Initialized");
                 

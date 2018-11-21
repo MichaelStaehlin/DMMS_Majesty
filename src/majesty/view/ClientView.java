@@ -157,6 +157,7 @@ public class ClientView {
     }
     
     public void initPlayerBoard(DeckOfCards deck) {
+    	
     	stage2.close();
     	Stage PlayerStage = new Stage();
     	this.stage3 = PlayerStage;

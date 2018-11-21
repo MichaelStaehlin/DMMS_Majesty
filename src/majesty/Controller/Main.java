@@ -24,7 +24,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Initialize the GUI
+       
+    	
+    	// Initialize the GUI
         model = new ClientModel();
         view = new ClientView(primaryStage, model);
         controller = new ClientController(model, view);

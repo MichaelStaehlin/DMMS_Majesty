@@ -1,7 +1,10 @@
 package majesty.model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 
 import Commons.Message;
@@ -105,6 +108,25 @@ public class ClientModel {
 
 	public void setDeck(DeckOfCards deck) {
 		this.deck = deck;
+	}
+
+	/**
+	 * 
+	 * @return ip
+	 * @Source https://stackoverflow.com/questions/2939218/getting-the-external-ip-adress-in-java
+	 */
+	public Integer getExternalID() {
+		Integer ip=0;
+		try {
+			
+			URL myURL = new URL("http://checkip.amazonaws.com");
+		BufferedReader in = new BufferedReader(new InputStreamReader(myURL.openStream()));
+		ip = Integer.parseInt(in.readLine());
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		System.out.println("ihne mit der Ip"+ip);
+		return ip;
 	}
 	
 }
