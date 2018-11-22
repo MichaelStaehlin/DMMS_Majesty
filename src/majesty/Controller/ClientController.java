@@ -38,7 +38,7 @@ public class ClientController {
                
                 if(model.getPlayerList().size()<2) {
                 	
-                	 view.initPlayerBoard();
+                	view.initPlayerBoard();
                 }
             }
             
