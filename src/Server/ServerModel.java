@@ -2,6 +2,7 @@ package Server;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import javafx.concurrent.Task;
 
 public class ServerModel {
+	ServerSocket server;
     private Integer port;
     private final Logger logger = Logger.getLogger("");
     public static int NUM_OF_CLIENTS= 0;
@@ -29,16 +31,18 @@ public class ServerModel {
         @Override
         protected Void call() throws Exception {
            
-        	ServerSocket listener = null;
+        	
             try {
-                listener = new ServerSocket(port, 10, null);
+            	getExternalID();
+                server = new ServerSocket(port, 4);
                 logger.info("Listening on port " + port);
+                InetAddress iAddress = InetAddress.getLocalHost();
                 
               while (true) {
             	  
                     // The "accept" method waits for a request, then creates a socket
                     // connected to the requesting client
-                    Socket clientSocket = listener.accept();
+                    Socket clientSocket = server.accept();
                     //testing
                    System.out.println("verbunden"); 
                     
@@ -51,7 +55,7 @@ public class ServerModel {
             } catch (Exception e) {
                 System.err.println(e);
             } finally {
-                if (listener != null) listener.close();
+                if (server != null) server.close();
             }
             return null;
         }

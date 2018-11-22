@@ -16,6 +16,7 @@ import Commons.Message_NewCustomer;
 public class ClientModel {
     String ipAddress;
     Integer port;
+    Socket socket;
     ArrayList<String> playerList = new ArrayList<String>();
     
 
@@ -33,9 +34,9 @@ public class ClientModel {
 	}
 
 	private Socket connect() {
-	    Socket socket = null;
+	    
         try {
-            socket = new Socket(ipAddress, port);
+            socket = new Socket("localhost", port);
             System.out.println("Connect");
         } catch (Exception e) {
             // TODO Auto-generated catch block

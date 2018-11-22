@@ -29,17 +29,18 @@ public class ClientController {
                 String ip = view.getTxtIP().getText();
                 Integer port = new Integer(2303);
                 System.out.println("Client "+port+"\n"+ip);
+                
         	
                 
-              //  model.init(ip, port);
-              //  view.getTxtMessages().setText("Initialized");
+                model.init(ip, port);
+               view.getTxtMessages().setText("Initialized");
                 
                 //Hier soll ein Splash Screen rein
                
-                if(model.getPlayerList().size()<2) {
+               // if(model.getPlayerList().size()<2) {
                 	
-                	view.initPlayerBoard();
-                }
+                //	view.initPlayerBoard();
+                //}
             }
             
              

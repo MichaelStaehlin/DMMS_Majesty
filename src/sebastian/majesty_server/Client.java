@@ -8,7 +8,7 @@ import java.net.Socket;
 
 /**
  *
- * @author X052440
+ * @author Michael Coban
  */
 public class Client {
     

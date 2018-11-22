@@ -90,7 +90,7 @@ public class ClientView {
         
         root.setTop(topBox);
         
-        topBox.getChildren().addAll(txtIP, lblClientName, txtClientName, male, female, btnGo);
+        topBox.getChildren().addAll(txtPort, txtIP, lblClientName, txtClientName, male, female, btnGo,btnHello);
         txtIP.setId("IP");
         txtPort.setId("Port");
         
