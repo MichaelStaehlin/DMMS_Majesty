@@ -56,8 +56,10 @@ public class ClientController {
         view.getBtnHello().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String result = model.sayHello(view.getTxtClientName().getText());
-                view.getTxtMessages().appendText("\nSaid 'hello', received: " + result);
+				Platform.runLater(() -> {
+					String result = model.sayHello(view.getTxtClientName().getText());
+					view.getTxtMessages().appendText("\nSaid 'hello', received: " + result);
+				});
             }
         });
 

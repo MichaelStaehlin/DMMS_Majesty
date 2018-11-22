@@ -36,6 +36,7 @@ public class ClientModel {
 	    Socket socket = null;
         try {
             socket = new Socket(ipAddress, port);
+            System.out.println("Connect");
         } catch (Exception e) {
             // TODO Auto-generated catch block
         }

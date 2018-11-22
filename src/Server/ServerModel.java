@@ -17,7 +17,7 @@ public class ServerModel {
     public static int getNUM_OF_CLIENTS() {
 		return NUM_OF_CLIENTS;
 	}
-
+    String ip;
 	public static void setNUM_OF_CLIENTS(int nUM_OF_CLIENTS) {
 		NUM_OF_CLIENTS = nUM_OF_CLIENTS;
 	}
@@ -76,18 +76,19 @@ public class ServerModel {
 	 * @return ip
 	 * @Source https://stackoverflow.com/questions/2939218/getting-the-external-ip-adress-in-java
 	 */
-	public Integer getExternalID() {
-		Integer ip=0;
+	public String getExternalID() {
+		//Integer ip=0;
 		try {
 			
 			URL myURL = new URL("http://checkip.amazonaws.com");
 		BufferedReader in = new BufferedReader(new InputStreamReader(myURL.openStream()));
-		ip = Integer.parseInt(in.readLine());
-		System.out.println("ihne mit der Ip"+ip);
-		return ip;
+		ip = in.readLine();
+//		System.out.println("ihne mit der Ip"+ip);
+//		return ip;
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		System.out.println("type this into your client to play online: " + ip);
 		return ip;
 		
 	}
