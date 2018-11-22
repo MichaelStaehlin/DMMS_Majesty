@@ -28,6 +28,7 @@ public enum MessageType {
     	if (msg instanceof Message_Hello) type = Hello;
     	else if (msg instanceof Message_NewCustomer) type = NewCustomer;
     	else if (msg instanceof Message_NewCustomerAccepted) type = NewCustomerAccepted;
+    	else if (msg instanceof Message_ClientDraw) type = ClientDraw;
     	else if (msg instanceof Message_Goodbye) type = Goodbye;
     	return type;
     }	
