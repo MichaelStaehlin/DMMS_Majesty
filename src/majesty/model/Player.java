@@ -299,6 +299,7 @@ public class Player implements Comparable<Player>{
 		
 		for(int i = 0; i < players.size(); i++){
 			if(players.get(i).muellerin.size()>=mostMuellerin){
+				//weiter unten einfuegen
 				mostMuellerin = players.get(i).muellerin.size();
 				if(players.get(i).muellerin.size()>mostMuellerin){
 					idMostMuellerin.clear();
