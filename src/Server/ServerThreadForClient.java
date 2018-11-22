@@ -56,6 +56,9 @@ public class ServerThreadForClient extends Thread {
 			nca_msg.setName(nc_msg.getName());
 			msgOut = nca_msg;
 			break;
+		case ClientDraw:
+			
+			break;
 		case Goodbye:
 			msgOut = new Message_Goodbye();
 			break;

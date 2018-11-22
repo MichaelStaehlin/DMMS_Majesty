@@ -28,7 +28,7 @@ public class ClientController {
             public void handle(ActionEvent event) {
                 String ip = view.getTxtIP().getText();
                 Integer port = new Integer(2303);
-        	System.out.println("Client "+port+"\n"+ip);
+                System.out.println("Client "+port+"\n"+ip);
         	
                 
                 model.init(ip, port);
