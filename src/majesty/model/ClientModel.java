@@ -115,7 +115,7 @@ public class ClientModel {
 	 * @return ip
 	 * @Source https://stackoverflow.com/questions/2939218/getting-the-external-ip-adress-in-java
 	 */
-	public Integer getExternalID() {
+	public void getExternalID() {
 		Integer ip=0;
 		try {
 			
@@ -125,8 +125,7 @@ public class ClientModel {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		System.out.println("ihne mit der Ip"+ip);
-		return ip;
+	
 	}
 	
 }

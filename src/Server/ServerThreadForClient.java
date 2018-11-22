@@ -57,6 +57,7 @@ public class ServerThreadForClient extends Thread {
 			msgOut = nca_msg;
 			break;
 		case ClientDraw:
+			
 			break;
 		case Goodbye:
 			msgOut = new Message_Goodbye();

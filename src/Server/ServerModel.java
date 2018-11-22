@@ -33,17 +33,19 @@ public class ServerModel {
                 listener = new ServerSocket(port, 10, null);
                 logger.info("Listening on port " + port);
                 
-               // while (NUM_OF_CLIENTS<firstnum) {
+              while (NUM_OF_CLIENTS<2) {
                     // The "accept" method waits for a request, then creates a socket
                     // connected to the requesting client
                     Socket clientSocket = listener.accept();
+                    //testing
+                   System.out.println("verbunden"); 
                     
                     ServerThreadForClient client = new ServerThreadForClient(clientSocket);
                     clientName.add(client);
                     System.out.println("Hallo"+clientSocket);
                     client.start();
                     NUM_OF_CLIENTS++;
-               // }
+                }
             } catch (Exception e) {
                 System.err.println(e);
             } finally {
