@@ -28,12 +28,14 @@ public class ServerModel {
     final Task<Void> serverTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
-            ServerSocket listener = null;
+           
+        	ServerSocket listener = null;
             try {
                 listener = new ServerSocket(port, 10, null);
                 logger.info("Listening on port " + port);
                 
-              while (NUM_OF_CLIENTS<2) {
+              while (true) {
+            	  
                     // The "accept" method waits for a request, then creates a socket
                     // connected to the requesting client
                     Socket clientSocket = listener.accept();

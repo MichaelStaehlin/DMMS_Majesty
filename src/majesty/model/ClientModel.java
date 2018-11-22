@@ -111,22 +111,6 @@ public class ClientModel {
 		this.deck = deck;
 	}
 
-	/**
-	 * 
-	 * @return ip
-	 * @Source https://stackoverflow.com/questions/2939218/getting-the-external-ip-adress-in-java
-	 */
-	public void getExternalID() {
-		Integer ip=0;
-		try {
-			
-			URL myURL = new URL("http://checkip.amazonaws.com");
-		BufferedReader in = new BufferedReader(new InputStreamReader(myURL.openStream()));
-		ip = Integer.parseInt(in.readLine());
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-	
-	}
+
 	
 }

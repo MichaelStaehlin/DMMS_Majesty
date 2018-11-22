@@ -31,8 +31,8 @@ public class ClientController {
                 System.out.println("Client "+port+"\n"+ip);
         	
                 
-                model.init(ip, port);
-                view.getTxtMessages().setText("Initialized");
+              //  model.init(ip, port);
+              //  view.getTxtMessages().setText("Initialized");
                 
                 //Hier soll ein Splash Screen rein
                
