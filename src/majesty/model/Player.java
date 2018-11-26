@@ -24,12 +24,12 @@ public class Player implements Comparable<Player>{
 	DeckOfCards deck;
 	private boolean turn;
 
-	public Player(int playerID, String playerName, boolean turn){
+	public Player(int playerIndex, String playerName, boolean turn){
 		/* kann weggelassen werden, trotzdem noch nicht gelöscht
 		 * this.ipAddress = ipAddress;
 		this.port = port;
 		*/
-		this.playerID = playerID;
+		this.playerID = playerIndex;
 		this.playerName = playerName;
 		this.gold = 0;
 		this.turn = turn;

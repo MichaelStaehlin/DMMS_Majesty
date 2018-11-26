@@ -11,20 +11,21 @@ import Commons.Message;
 import Commons.Message_Goodbye;
 import Commons.Message_Hello;
 import Commons.Message_NewCustomer;
+import Server.ServerThreadForClient;
 
 
 public class ClientModel {
     String ipAddress;
     Integer port;
     Socket socket;
-    ArrayList<String> playerList = new ArrayList<String>();
+    ArrayList<Player> playerList = new ArrayList<Player>();
     
 
-	public ArrayList<String> getPlayerList() {
+	public ArrayList<Player> getPlayerList() {
 		return playerList;
 	}
 
-	public void setPlayerList(ArrayList<String> playerList) {
+	public void setPlayerList(ArrayList<Player> playerList) {
 		this.playerList = playerList;
 	}
 
@@ -62,8 +63,10 @@ public class ClientModel {
 	    }
 		return result;
 	}
-
+	
+	
 	public String sayNewClient(String clientName) {
+		
         String result = null;
         Socket socket = connect();
         if (socket != null) {
