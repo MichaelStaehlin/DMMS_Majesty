@@ -24,7 +24,7 @@ public class ServerModel {
 		NUM_OF_CLIENTS = nUM_OF_CLIENTS;
 	}
 
-	private  int firstnum= 2;
+	
     private ArrayList<ServerThreadForClient> clientName = new ArrayList<ServerThreadForClient>();
     
     final Task<Void> serverTask = new Task<Void>() {
@@ -39,8 +39,8 @@ public class ServerModel {
                 InetAddress iAddress = InetAddress.getLocalHost();
                 
                 
-              while (true) {
-            	  
+              while (clientName.size()<2) {
+            	  System.out.println("Waiting for client to connect...");
                     // The "accept" method waits for a request, then creates a socket
                     // connected to the requesting client
                     Socket clientSocket = server.accept();
@@ -52,6 +52,10 @@ public class ServerModel {
                     System.out.println("Hallo"+clientSocket);
                     client.start();
                     NUM_OF_CLIENTS++;
+                    if (NUM_OF_CLIENTS==2) {
+                    	System.out.println("2 Spieler drin");
+                    	sendClientStartMsg();
+                    }
                 }
             } catch (Exception e) {
                 System.err.println(e);
@@ -60,6 +64,11 @@ public class ServerModel {
             }
             return null;
         }
+
+		private void sendClientStartMsg() {
+			
+			
+		}
     };
     
     /**
@@ -70,13 +79,6 @@ public class ServerModel {
         new Thread(serverTask).start();
     }
 
-	public int getFirstnum() {
-		return firstnum;
-	}
-
-	public void setFirstnum(int firstnum) {
-		this.firstnum = firstnum;
-	}
 	
 	/**
 	 * 

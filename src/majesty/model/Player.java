@@ -23,9 +23,11 @@ public class Player implements Comparable<Player>{
 	ArrayList<Integer> lazarett;
 	DeckOfCards deck;
 
-	public Player(String ipAddress, int port, int playerID, String playerName){
-		this.ipAddress = ipAddress;
+	public Player(int playerID, String playerName){
+		/* kann weggelassen werden, trotzdem noch nicht gelöscht
+		 * this.ipAddress = ipAddress;
 		this.port = port;
+		*/
 		this.playerID = playerID;
 		this.playerName = playerName;
 		this.gold = 0;

@@ -13,7 +13,7 @@ public class Client {
 
     public void start() throws IOException {
         System.out.println("Starting client");
-        Socket socket = new Socket("194.230.158.103", 8888);
+        Socket socket = new Socket("localhost", 8888);
         System.out.println("schritt2");
 
         writer = new PrintWriter(socket.getOutputStream(), true);

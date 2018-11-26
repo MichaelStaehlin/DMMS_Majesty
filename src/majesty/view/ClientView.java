@@ -53,7 +53,7 @@ public class ClientView {
 
 	protected TextField txtIP = new TextField();
     protected Label lblPort = new Label("Port");
-    protected TextField txtPort = new TextField("2303");
+    protected TextField txtPort = new TextField("8080");
     protected Label lblClientName = new Label("Client name");
     protected TextField txtClientName = new TextField("");
     protected Button btnGo = new Button("Go");

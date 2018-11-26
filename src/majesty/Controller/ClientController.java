@@ -14,7 +14,7 @@ import majesty.view.ClientView;
 
 public class ClientController {
     
-    protected static final int NUM_OF_CLIENTS = 2;
+    
 	final private ClientModel model;
     final private ClientView view;
     
@@ -26,8 +26,9 @@ public class ClientController {
         view.getBtnGo().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+            	int i = 0;
                 String ip = view.getTxtIP().getText();
-                Integer port = new Integer(2303);
+                Integer port = new Integer(8080);
                 System.out.println("Client "+port+"\n"+ip);
                 
         	
@@ -37,10 +38,10 @@ public class ClientController {
                 
                 //Hier soll ein Splash Screen rein
                
-               // if(model.getPlayerList().size()<2) {
+                if(ServerModel.NUM_OF_CLIENTS==2) {
                 	
-                //	view.initPlayerBoard();
-                //}
+                	view.initPlayerBoard();
+                }
             }
             
              
