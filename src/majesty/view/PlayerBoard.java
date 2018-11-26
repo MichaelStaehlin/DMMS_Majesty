@@ -29,7 +29,7 @@ public class PlayerBoard extends VBox{
 		hboxGebaeudeCards = new HBox();
 		
             
-            Label £= new Label("Ficken");
+            Label l= new Label("Test");
        
             
             
