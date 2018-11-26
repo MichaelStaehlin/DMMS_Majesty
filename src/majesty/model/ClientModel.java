@@ -1,7 +1,10 @@
 package majesty.model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 
 import Commons.Message;
@@ -13,6 +16,7 @@ import Commons.Message_NewCustomer;
 public class ClientModel {
     String ipAddress;
     Integer port;
+    Socket socket;
     ArrayList<String> playerList = new ArrayList<String>();
     
 
@@ -30,9 +34,10 @@ public class ClientModel {
 	}
 
 	private Socket connect() {
-	    Socket socket = null;
+	    
         try {
-            socket = new Socket(ipAddress, port);
+            socket = new Socket("localhost", port);
+            System.out.println("Connect");
         } catch (Exception e) {
             // TODO Auto-generated catch block
         }
@@ -106,5 +111,7 @@ public class ClientModel {
 	public void setDeck(DeckOfCards deck) {
 		this.deck = deck;
 	}
+
+
 	
 }

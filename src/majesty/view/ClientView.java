@@ -51,9 +51,9 @@ public class ClientView {
     protected Label lblIP = new Label("IP");
     
 
-	protected TextField txtIP = new TextField("127.0.0.1");
+	protected TextField txtIP = new TextField();
     protected Label lblPort = new Label("Port");
-    protected TextField txtPort = new TextField("8080");
+    protected TextField txtPort = new TextField("2303");
     protected Label lblClientName = new Label("Client name");
     protected TextField txtClientName = new TextField("");
     protected Button btnGo = new Button("Go");
@@ -90,7 +90,7 @@ public class ClientView {
         
         root.setTop(topBox);
         
-        topBox.getChildren().addAll( lblClientName, txtClientName, male, female, btnGo);
+        topBox.getChildren().addAll(txtPort, txtIP, lblClientName, txtClientName, male, female, btnGo,btnHello);
         txtIP.setId("IP");
         txtPort.setId("Port");
         
@@ -156,16 +156,17 @@ public class ClientView {
     	
     }
     
-    public void initPlayerBoard(DeckOfCards deck) {
-    	stage2.close();
+    public void initPlayerBoard() {
+    	
+    	stage1.close();
     	Stage PlayerStage = new Stage();
     	this.stage3 = PlayerStage;
     	
     	BorderPane root = new BorderPane();
     	HBox hboxCards = new HBox();
-    	deck.createFinalDeck(2);
+    	DeckOfCards wholeDeck = new DeckOfCards(2);
     	 for (int i = 0; i < 2; i++) {
- 			Card card= deck.dealCard();
+ 			Card card= wholeDeck.dealCard();
              CardLabel lblCard = new CardLabel();
              lblCard.setCard(card);
              hboxCards.getChildren().add(lblCard);
@@ -188,7 +189,7 @@ public class ClientView {
     	 }
     	 
     	 for (int i = 0; i < 6; i++) {
-  			Card card= deck.dealCard();
+  			Card card= wholeDeck.dealCard();
               CardLabel lblCard = new CardLabel();
               hboxCards.getChildren().add(lblCard);
               lblCard.setCard(card);

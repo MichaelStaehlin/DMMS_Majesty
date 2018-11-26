@@ -27,20 +27,28 @@ public class ClientController {
             @Override
             public void handle(ActionEvent event) {
                 String ip = view.getTxtIP().getText();
-                Integer port = new Integer(view.getTxtPort().getText());
+                Integer port = new Integer(2303);
+                System.out.println("Client "+port+"\n"+ip);
+                
+        	
+                
                 model.init(ip, port);
-                view.getTxtMessages().setText("Initialized");
+               view.getTxtMessages().setText("Initialized");
                 
                 //Hier soll ein Splash Screen rein
                
-                while(model.getPlayerList().size()<2) {
-                	 view.initLoadingScreen();
-                }
+               // if(model.getPlayerList().size()<2) {
+                	
+                //	view.initPlayerBoard();
+                //}
             }
             
-            
+             
             
         });
+        
+       
+       
         
        
        
@@ -49,8 +57,10 @@ public class ClientController {
         view.getBtnHello().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String result = model.sayHello(view.getTxtClientName().getText());
-                view.getTxtMessages().appendText("\nSaid 'hello', received: " + result);
+				Platform.runLater(() -> {
+					String result = model.sayHello(view.getTxtClientName().getText());
+					view.getTxtMessages().appendText("\nSaid 'hello', received: " + result);
+				});
             }
         });
 

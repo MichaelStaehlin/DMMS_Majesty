@@ -9,6 +9,7 @@ public class Message_Hello extends Message {
 
 	@Override
 	protected void receiveAttributes(ArrayList<NameValue> pairs) {
+		
 	}    
 	
 	@Override
