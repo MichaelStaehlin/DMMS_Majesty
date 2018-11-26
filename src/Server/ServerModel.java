@@ -38,6 +38,7 @@ public class ServerModel {
                 logger.info("Listening on port " + port);
                 InetAddress iAddress = InetAddress.getLocalHost();
                 
+                
               while (true) {
             	  
                     // The "accept" method waits for a request, then creates a socket
