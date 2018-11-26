@@ -25,15 +25,16 @@ public class ServerModel {
 	}
 
 	
-    private ArrayList<ServerThreadForClient> clientName = new ArrayList<ServerThreadForClient>();
+    public ArrayList<ServerThreadForClient> clientName = new ArrayList<ServerThreadForClient>();
     
-    final Task<Void> serverTask = new Task<Void>() {
+
+	final Task<Void> serverTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
            
         	
             try {
-            	getExternalID();
+            	
                 server = new ServerSocket(port, 4);
                 logger.info("Listening on port " + port);
                 InetAddress iAddress = InetAddress.getLocalHost();
@@ -79,12 +80,20 @@ public class ServerModel {
         new Thread(serverTask).start();
     }
 
-	
+    
+    public ArrayList<ServerThreadForClient> getClientName() {
+		return clientName;
+	}
+
+	public void setClientName(ArrayList<ServerThreadForClient> clientName) {
+		this.clientName = clientName;
+	}
+	/*brauchen wir nicht
 	/**
 	 * 
 	 * @return ip
 	 * @Source https://stackoverflow.com/questions/2939218/getting-the-external-ip-adress-in-java
-	 */
+	 *
 	public String getExternalID() {
 		//Integer ip=0;
 		try {
@@ -100,7 +109,9 @@ public class ServerModel {
 		System.out.println("type this into your client to play online: " + ip);
 		return ip;
 		
+		
 	}
+	*/
 	
     
     
