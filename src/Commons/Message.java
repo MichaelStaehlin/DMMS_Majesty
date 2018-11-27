@@ -30,6 +30,8 @@ public abstract class Message {
     private static final String ATTR_CLIENT = "client";
     private static final String ATTR_ID = "id";
     private static final String ATTR_TIMESTAMP = "timestamp";
+    private String indexCommand;
+    private boolean playerTurn;
     
     // The String corresponding to a message object
     private String message;
@@ -150,6 +152,8 @@ public abstract class Message {
 	        MessageType type = MessageType.parseType(messageType.value);
 	        if (type == MessageType.Hello) newMessage = new Message_Hello();
 	        else if (type == MessageType.NewCustomer) newMessage = new Message_NewCustomer();
+	        
+	        else if (type == MessageType.ClientDraw) newMessage = new Message_ClientDraw();
 	        else if (type == MessageType.NewCustomerAccepted) newMessage = new Message_NewCustomerAccepted();
 	        else if (type == MessageType.Goodbye) newMessage = new Message_Goodbye();
     	}

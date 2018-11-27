@@ -22,13 +22,17 @@ public class Player implements Comparable<Player>{
 	ArrayList<Integer> adlige;
 	ArrayList<Integer> lazarett;
 	DeckOfCards deck;
+	private boolean turn;
 
-	public Player(String ipAddress, int port, int playerID, String playerName){
-		this.ipAddress = ipAddress;
+	public Player(int playerIndex, String playerName, boolean turn){
+		/* kann weggelassen werden, trotzdem noch nicht gelöscht
+		 * this.ipAddress = ipAddress;
 		this.port = port;
-		this.playerID = playerID;
+		*/
+		this.playerID = playerIndex;
 		this.playerName = playerName;
 		this.gold = 0;
+		this.turn = turn;
 		
 		//naechste 3 Zeilen werden spaeter von Server gesetzt
 		this.deck = new DeckOfCards(2);
@@ -49,6 +53,14 @@ public class Player implements Comparable<Player>{
 		
 	}
 	
+	public boolean isTurn() {
+		return turn;
+	}
+
+	public void setTurn(boolean turn) {
+		this.turn = turn;
+	}
+
 	public int getGold(){
 		return this.gold;
 	}

@@ -5,16 +5,18 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 import majesty.model.ClientModel;
+import majesty.model.Player;
 import majesty.view.ClientView;
 
 public class ClientController {
     
-    protected static final int NUM_OF_CLIENTS = 2;
+    
 	final private ClientModel model;
     final private ClientView view;
     
@@ -26,21 +28,57 @@ public class ClientController {
         view.getBtnGo().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+            	int i = 0;
                 String ip = view.getTxtIP().getText();
-                Integer port = new Integer(2303);
+                Integer port = new Integer(8080);
                 System.out.println("Client "+port+"\n"+ip);
                 
-        	
+                // erster Spieler wartet im Splashscreen
+                if (model.getPlayerList().size()==1) {
+                	String clientName =view.getTxtClientName().getText();
+                	Player firstPlayer = new Player(0, clientName , true);
+                	model.getPlayerList().add(firstPlayer);
+                	
+                	
+                	
+                	if(model.getPlayerList().size()==1) {
+                	// Hier Splashscreen initialisieren
+                		
+                		System.out.println("erster Spieler");
+                	}
+                }
+                
+                
+             // Wenn 2 Spieler erreicht
+
+                if (model.getPlayerList().size()==2) {
+                	String clientName =view.getTxtClientName().getText();
+                	Player secondPlayer = new Player(1, clientName , false);
+                	// Splashscreen schliessen
+                	System.out.println("zweiter Spieler");
+                	
+                	view.initPlayerBoard();
+                	System.out.println("Board initialisiert");
+                	
+                	
+                }
+                
+                //no
+                
+                
+             
+                
+                
+                
+                if (model.getPlayerList().size()>2) {
+                	Alert toMuchPlayer = new Alert(null, "Already enough Players", null);
+                }
+                
+                
                 
                 model.init(ip, port);
                view.getTxtMessages().setText("Initialized");
                 
-                //Hier soll ein Splash Screen rein
-               
-               // if(model.getPlayerList().size()<2) {
-                	
-                //	view.initPlayerBoard();
-                //}
             }
             
              

@@ -24,23 +24,24 @@ public class ServerModel {
 		NUM_OF_CLIENTS = nUM_OF_CLIENTS;
 	}
 
-	private  int firstnum= 2;
-    private ArrayList<ServerThreadForClient> clientName = new ArrayList<ServerThreadForClient>();
+	
+    public ArrayList<ServerThreadForClient> clientName = new ArrayList<ServerThreadForClient>();
     
-    final Task<Void> serverTask = new Task<Void>() {
+
+	final Task<Void> serverTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
            
         	
             try {
-            	getExternalID();
+            	
                 server = new ServerSocket(port, 4);
                 logger.info("Listening on port " + port);
                 InetAddress iAddress = InetAddress.getLocalHost();
                 
                 
-              while (true) {
-            	  
+              while (clientName.size()<2) {
+            	  System.out.println("Waiting for client to connect...");
                     // The "accept" method waits for a request, then creates a socket
                     // connected to the requesting client
                     Socket clientSocket = server.accept();
@@ -52,6 +53,10 @@ public class ServerModel {
                     System.out.println("Hallo"+clientSocket);
                     client.start();
                     NUM_OF_CLIENTS++;
+                    if (NUM_OF_CLIENTS==2) {
+                    	System.out.println("2 Spieler drin");
+                    	sendClientStartMsg();
+                    }
                 }
             } catch (Exception e) {
                 System.err.println(e);
@@ -60,6 +65,11 @@ public class ServerModel {
             }
             return null;
         }
+
+		private void sendClientStartMsg() {
+			
+			
+		}
     };
     
     /**
@@ -70,19 +80,20 @@ public class ServerModel {
         new Thread(serverTask).start();
     }
 
-	public int getFirstnum() {
-		return firstnum;
+    
+    public ArrayList<ServerThreadForClient> getClientName() {
+		return clientName;
 	}
 
-	public void setFirstnum(int firstnum) {
-		this.firstnum = firstnum;
+	public void setClientName(ArrayList<ServerThreadForClient> clientName) {
+		this.clientName = clientName;
 	}
-	
+	/*brauchen wir nicht
 	/**
 	 * 
 	 * @return ip
 	 * @Source https://stackoverflow.com/questions/2939218/getting-the-external-ip-adress-in-java
-	 */
+	 *
 	public String getExternalID() {
 		//Integer ip=0;
 		try {
@@ -98,7 +109,9 @@ public class ServerModel {
 		System.out.println("type this into your client to play online: " + ip);
 		return ip;
 		
+		
 	}
+	*/
 	
     
     

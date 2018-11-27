@@ -8,7 +8,9 @@ public enum MessageType {
     Hello,
     NewCustomer,
     NewCustomerAccepted,
+    StartGame,
     ClientDraw,
+    ProcessResult,
     Goodbye,
     Error;
 	
@@ -26,7 +28,8 @@ public enum MessageType {
     public static MessageType getType(Message msg) {
     	MessageType type = MessageType.Error;
     	if (msg instanceof Message_Hello) type = Hello;
-    	else if (msg instanceof Message_NewCustomer) type = NewCustomer;
+    	else if (msg instanceof Message_StartGame) type = StartGame;
+    	else if (msg instanceof Message_ProcessResult) type = ProcessResult;
     	else if (msg instanceof Message_NewCustomerAccepted) type = NewCustomerAccepted;
     	else if (msg instanceof Message_ClientDraw) type = ClientDraw;
     	else if (msg instanceof Message_Goodbye) type = Goodbye;

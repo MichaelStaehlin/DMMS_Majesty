@@ -15,6 +15,8 @@ import Commons.Message_NewCustomerAccepted;
 public class ServerThreadForClient extends Thread {
     private final Logger logger = Logger.getLogger("");
     private Socket clientSocket;
+    private static int roundCounter;
+    private boolean playerTurn;
 
     public ServerThreadForClient(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -43,9 +45,10 @@ public class ServerThreadForClient extends Thread {
     
     private Message processMessage(Message msgIn) {
 		logger.info("Message received from client: "+ msgIn.toString());
-		String clientName = msgIn.getClient();		
+		String clientName1 = msgIn.getClient();		
 
 		Message msgOut = null;
+		
 		switch (MessageType.getType(msgIn)) {
 		case Hello:
 			msgOut = new Message_Hello();
@@ -56,7 +59,18 @@ public class ServerThreadForClient extends Thread {
 			nca_msg.setName(nc_msg.getName());
 			msgOut = nca_msg;
 			break;
+		case StartGame:
+			roundCounter++;
+		
 		case ClientDraw:
+			if (roundCounter<12&&playerTurn==true) {
+				roundCounter++;
+			}
+			
+			if (roundCounter<12&&playerTurn==false) {
+				roundCounter++;
+				
+			}
 			
 			break;
 		case Goodbye:
