@@ -13,6 +13,7 @@ import javafx.stage.WindowEvent;
 import majesty.model.ClientModel;
 import majesty.model.Player;
 import majesty.view.ClientView;
+import majesty.view.Splash;
 
 public class ClientController {
     
@@ -34,7 +35,7 @@ public class ClientController {
                 System.out.println("Client "+port+"\n"+ip);
                 
                 // erster Spieler wartet im Splashscreen
-                if (model.getPlayerList().size()==1) {
+                if (model.getPlayerList().size()==0) {
                 	String clientName =view.getTxtClientName().getText();
                 	Player firstPlayer = new Player(0, clientName , true);
                 	model.getPlayerList().add(firstPlayer);
@@ -42,10 +43,17 @@ public class ClientController {
                 	
                 	
                 	if(model.getPlayerList().size()==1) {
-                	// Hier Splashscreen initialisieren
-                		
+                		// Hier Splashscreen initialisieren
+                		view.getStage1().close();
+                	while(model.getPlayerList().size()==1) {
+                		Splash.displaySplash();
+                	}
+                	view.initPlayerBoard();
+                	
                 		System.out.println("erster Spieler");
                 	}
+                	
+                	
                 }
                 
                 

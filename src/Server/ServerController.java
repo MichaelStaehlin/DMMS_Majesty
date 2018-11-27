@@ -20,7 +20,7 @@ public class ServerController {
             public void handle(ActionEvent event) {
                 Integer port = new Integer(view.txtPort.getText());
                 model.startServerSocket(port);
-                System.out.println(""+model.getExternalID());
+               
             }
             
             
