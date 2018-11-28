@@ -10,7 +10,7 @@ public class Main extends Application {
     private ClientController controller;
     private ClientModel model;
    
-//    jkldjfs
+
 
 	
 
