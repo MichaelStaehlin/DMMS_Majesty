@@ -25,7 +25,7 @@ public class Player implements Comparable<Player>{
 	private boolean turn;
 
 	public Player(int playerIndex, String playerName, boolean turn){
-		/* kann weggelassen werden, trotzdem noch nicht gelöscht
+		/* kann weggelassen werden, trotzdem noch nicht gelï¿½scht
 		 * this.ipAddress = ipAddress;
 		this.port = port;
 		*/

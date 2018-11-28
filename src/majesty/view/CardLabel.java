@@ -1,6 +1,7 @@
 package majesty.view;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -42,6 +43,28 @@ public class CardLabel extends Label {
 			imv.fitWidthProperty().bind(this.widthProperty());
 			imv.fitHeightProperty().bind(this.heightProperty());
 			imv.setPreserveRatio(true);
+			Button b = new Button("", imv);
+			this.setGraphic(b);
+		} else {
+			this.setGraphic(null);
+		}
+		
+		
+	}
+	
+	private String locationCardToFileName(Card card) {
+			
+			String Location = card.getLocation().toString();
+			return  Location + ".jpg";
+		}
+	public void setLoadScreen(Card card) {
+		if (card != null) {
+			String fileName = loadlingScreenToFileName(card);
+			Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("majesty/image/" + fileName));
+			ImageView imv = new ImageView(image);
+			imv.fitWidthProperty().bind(this.widthProperty());
+			imv.fitHeightProperty().bind(this.heightProperty());
+			imv.setPreserveRatio(true);
 			this.setGraphic(imv);
 		} else {
 			this.setGraphic(null);
@@ -50,33 +73,12 @@ public class CardLabel extends Label {
 		
 	}
 	
-private String locationCardToFileName(Card card) {
+	private String loadlingScreenToFileName(Card card) {
+		String loadScreen = card.getLs().toString();
+		return  loadScreen + ".jpg";
 		
-		String Location = card.getLocation().toString();
-		return  Location + ".jpg";
-	}
-public void setLoadScreen(Card card) {
-	if (card != null) {
-		String fileName = loadlingScreenToFileName(card);
-		Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("majesty/image/" + fileName));
-		ImageView imv = new ImageView(image);
-		imv.fitWidthProperty().bind(this.widthProperty());
-		imv.fitHeightProperty().bind(this.heightProperty());
-		imv.setPreserveRatio(true);
-		this.setGraphic(imv);
-	} else {
-		this.setGraphic(null);
 	}
 	
-	
-}
-
-private String loadlingScreenToFileName(Card card) {
-	String loadScreen = card.getLs().toString();
-	return  loadScreen + ".jpg";
-	
-}
-
-}
+	}
 
 

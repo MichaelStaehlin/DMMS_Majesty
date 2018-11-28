@@ -11,6 +11,7 @@ public class Main extends Application {
     private ClientModel model;
    
 
+
 	
 
 	public static void main(String[] args) {

@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author micha
+ * @author michael
  *
  */
 package Server;
