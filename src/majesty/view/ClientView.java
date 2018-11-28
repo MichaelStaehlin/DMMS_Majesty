@@ -245,7 +245,15 @@ public class ClientView {
     	 PlayerStage.show();
     }
     
-    public void start() {
+    public Stage getStage1() {
+		return stage1;
+	}
+
+	public void setStage1(Stage stage1) {
+		this.stage1 = stage1;
+	}
+
+	public void start() {
         stage1.show();
     }
     
