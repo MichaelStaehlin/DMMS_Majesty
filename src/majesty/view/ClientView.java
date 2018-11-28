@@ -158,7 +158,7 @@ public class ClientView {
     
     public void initPlayerBoard() {
     	
-    	stage1.close();
+    	
     	Stage PlayerStage = new Stage();
     	this.stage3 = PlayerStage;
     	

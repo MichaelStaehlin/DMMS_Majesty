@@ -1,5 +1,6 @@
 package majesty.Controller;
 
+import Commons.Message_ReadyToStart;
 import Server.ServerModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -39,15 +40,17 @@ public class ClientController {
                 	String clientName =view.getTxtClientName().getText();
                 	Player firstPlayer = new Player(0, clientName , true);
                 	model.getPlayerList().add(firstPlayer);
-                	
+                	Message_ReadyToStart ready = new Message_ReadyToStart();
+                	//ready.send(model.getPlayerList().get(i));
                 	
                 	
                 	if(model.getPlayerList().size()==1) {
                 		// Hier Splashscreen initialisieren
                 		view.getStage1().close();
-                	while(model.getPlayerList().size()==1) {
+                
                 		Splash.displaySplash();
-                	}
+                
+                		
                 	view.initPlayerBoard();
                 	
                 		System.out.println("erster Spieler");

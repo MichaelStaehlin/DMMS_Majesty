@@ -11,6 +11,7 @@ import Commons.Message_Goodbye;
 import Commons.Message_Hello;
 import Commons.Message_NewCustomer;
 import Commons.Message_NewCustomerAccepted;
+import Commons.Message_StartGame;
 
 public class ServerThreadForClient extends Thread {
     private final Logger logger = Logger.getLogger("");
@@ -60,6 +61,9 @@ public class ServerThreadForClient extends Thread {
 			msgOut = nca_msg;
 			break;
 		case StartGame:
+			msgOut = new Message_StartGame();
+			
+			
 			roundCounter++;
 		
 		case ClientDraw:
