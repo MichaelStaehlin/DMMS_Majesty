@@ -17,6 +17,7 @@ import majesty.view.Splash;
 
 public class ClientController {
     
+//	
     
 	final private ClientModel model;
     final private ClientView view;
