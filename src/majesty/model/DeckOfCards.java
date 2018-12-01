@@ -1,5 +1,6 @@
 package majesty.model;
-	import java.util.ArrayList;
+	import java.io.Serializable;
+import java.util.ArrayList;
 	import java.util.Collections;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -10,7 +11,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 	 */
 	
 	
-	public class DeckOfCards {
+	public class DeckOfCards implements Serializable{
 		
 		public static void main (String[] args){
 			DeckOfCards d = new DeckOfCards(NUM_PLAYERS);

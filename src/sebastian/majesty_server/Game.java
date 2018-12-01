@@ -3,12 +3,22 @@ package sebastian.majesty_server;
 import java.io.IOException;
 import java.util.List;
 
+import majesty.model.DeckOfCards;
+
 public class Game {
 
     private final List<Client> clients;
+    private final int rounds;
+    private int roundCounter;
+    private DeckOfCards deck;
+    private int currentActivePlayer;
 
     public Game(List<Client> clients) {
         this.clients = clients;
+        this.rounds = clients.size()*12;
+        this.roundCounter=0;
+        this.deck = new DeckOfCards(clients.size());
+        this.currentActivePlayer=0;
     }
 
     public void start() {
@@ -21,8 +31,12 @@ public class Game {
 
     private void startImpl() throws IOException {
         while (!gameFinished()) {
-            processInput(clients.get(0)); //TODO decide which client is next
+        	if(currentActivePlayer>=clients.size())
+        		currentActivePlayer = 0;
+        	processInput(clients.get(currentActivePlayer)); //TODO decide which client is next
             updateClients();
+            currentActivePlayer++;
+            
         }
 
         for (Client client : clients) {
@@ -48,7 +62,9 @@ public class Game {
     }
 
     private boolean gameFinished() {
-        return false; //TODO implement game ending condition
+    	if(this.roundCounter<=this.rounds)
+    		return false;
+    	else return true;//TODO implement game ending condition
     }
 
 }
