@@ -1,10 +1,13 @@
 package sebastian.majesty_server;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+
+import majesty.model.DeckOfCards;
 
 public class Server {
 
@@ -25,6 +28,7 @@ public class Server {
             System.out.println("Client from " + clientSocket.getInetAddress().getHostName() + ":" + clientSocket.getPort() + " connected");
             clients.add(new Client(clientSocket));
         }
+        
         
         System.out.println(NUM_CLIENTS + " connected, starting game");
         Game g = new Game(clients);
