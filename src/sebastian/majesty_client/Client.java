@@ -54,6 +54,7 @@ public class Client {
         	String[] commands = command.split(",");
         	int currentActivePlayer = Integer.parseInt(commands[0]);
         	int pickedCard = Integer.parseInt(commands[1]);
+        	//TODO MePickCard und OtherPickCard aufrufen
             System.out.println("Board has been updated by server");
             //TODO update board
         }
