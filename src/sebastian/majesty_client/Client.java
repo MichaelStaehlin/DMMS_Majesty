@@ -22,8 +22,7 @@ public class Client {
         
         ObjectInputStream objIn = new ObjectInputStream(socket.getInputStream());
         DeckOfCards deck = (DeckOfCards) objIn.readObject();
-        ArrayList<Client> clients = new ArrayList<>();
-        clients = (ArrayList<Client>) objIn.readObject();
+        ArrayList<Client> clients = (ArrayList<Client>) objIn.readObject();
         objIn.close();
 
         writer = new PrintWriter(socket.getOutputStream(), true);
@@ -45,8 +44,17 @@ public class Client {
         if (command.equals("Your turn!")) {
             System.out.println("It is my turn!");
 
+            //next line: send index of picked card
             writer.println("My turn = hello world");
-        } else {
+        } if(command.equals("Game Finished!")){
+        //TODO End-Methoden aufrufen
+        }
+        
+        else {
+        	String[] commands = command.split(",");
+        	int currentActivePlayer = Integer.parseInt(commands[0]);
+        	int pickedCard = Integer.parseInt(commands[1]);
+        	//TODO MePickCard und OtherPickCard aufrufen
             System.out.println("Board has been updated by server");
             //TODO update board
         }
