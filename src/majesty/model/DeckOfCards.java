@@ -13,6 +13,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 	
 	public class DeckOfCards implements Serializable{
 		
+		/**
+		 * 
+		 */
+		/**
+		 * 
+		 */
 		public static void main (String[] args){
 			DeckOfCards d = new DeckOfCards(NUM_PLAYERS);
 			System.out.println(d.deck.size());
