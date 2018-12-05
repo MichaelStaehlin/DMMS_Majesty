@@ -17,23 +17,20 @@ public class Client implements Serializable{
 
     private PrintWriter writer;
     private BufferedReader reader;
+    private int id;
+    private String name;
 
     public void start() throws IOException, ClassNotFoundException {
         System.out.println("Starting client");
         Socket socket = new Socket("localhost", 8888);
         System.out.println("schritt2");
-        
-        /**
-         * TEST
-         * 
-         */
-        
 
         writer = new PrintWriter(socket.getOutputStream(), true);
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         
         Scanner scan = new Scanner(System.in);
-        String name = scan.nextLine();
+        System.out.println("Your Name?");
+        name = scan.nextLine();
         writer.println(name);
         
         //Client wartet bis ddie ArrayList Player übermittelt wird
@@ -42,8 +39,10 @@ public class Client implements Serializable{
         ArrayList<Player> players = (ArrayList<Player>) objIn.readObject();
         //ArrayList<Client> clients = (ArrayList<Client>) objIn.readObject();
         //objIn.close();
-
         
+        this.id = players.get(0).getIndexByname(name);
+        System.out.println("My ID: "+id);
+       
         
         while (!socket.isClosed()) {
             play();

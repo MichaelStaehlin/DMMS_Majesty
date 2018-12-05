@@ -29,6 +29,7 @@ public class Server {
             Socket clientSocket = server.accept();
             System.out.println("Client from " + clientSocket.getInetAddress().getHostName() + ":" + clientSocket.getPort() + " connected");
             clients.add(new Client(clientSocket));
+            System.out.println("Waiting for Client Name...");
             String name = clients.get(indexCounter).getReader().readLine();
             Player p = new Player(indexCounter,name);
             players.add(p);

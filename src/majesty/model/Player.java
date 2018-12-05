@@ -56,6 +56,16 @@ public class Player implements Comparable<Player>,Serializable{
 		
 	}
 	
+	public int getIndexByname(String pName)
+    {
+        for(Player p : players)
+        {
+            if(p.getPlayerName().equals(pName))
+                return players.indexOf(p);
+        }
+        return -1;
+    }
+	
 	public void setPlayerList(ArrayList<Player> players){
 		this.players = players;
 	}
