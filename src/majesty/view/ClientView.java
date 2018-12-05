@@ -158,13 +158,13 @@ public class ClientView {
     
     public void initPlayerBoard() {
     	
-    	stage1.close();
+    	
     	Stage PlayerStage = new Stage();
     	this.stage3 = PlayerStage;
-    	
+    	BoardView bv = new BoardView(stage3);
     	BorderPane root = new BorderPane();
-    	HBox hboxCards = new HBox();
-    	DeckOfCards wholeDeck = new DeckOfCards(2);
+    	//HBox hboxCards = new HBox();
+    	/*DeckOfCards wholeDeck = new DeckOfCards(2);
     	 for (int i = 0; i < 2; i++) {
  			Card card= wholeDeck.dealCard();
              CardLabel lblCard = new CardLabel();
@@ -228,13 +228,7 @@ public class ClientView {
    
     	root.setBottom(locations);
     	
-    	root.setLeft(btnHello);
-    	
-    	 
-    	 root.setTop(score);
-    	 
-    	
-    	 
+    	root.setLeft(btnHello); 	 
     	 
     	 
     	 
@@ -243,6 +237,7 @@ public class ClientView {
     	
     	 PlayerStage.setScene(scene);
     	 PlayerStage.show();
+    	 */
     }
     
     public Stage getStage1() {

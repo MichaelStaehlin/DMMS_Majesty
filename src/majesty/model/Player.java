@@ -1,18 +1,27 @@
 package majesty.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class Player implements Comparable<Player>{
+public class Player implements Comparable<Player>,Serializable{
 
-	private String ipAddress;
-	private int port;
+	//private String ipAddress;
+	//private int port;
 	private int gold;	
 	private int playerID;
 	private int numOfPlayers;
 	private String playerName;
 	ArrayList<Player> players;
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
 	ArrayList<Integer> muellerin;
 	ArrayList<Integer> brauer;
 	ArrayList<Integer> hexe;
@@ -22,9 +31,9 @@ public class Player implements Comparable<Player>{
 	ArrayList<Integer> adlige;
 	ArrayList<Integer> lazarett;
 	DeckOfCards deck;
-	private boolean turn;
 
-	public Player(int playerIndex, String playerName, boolean turn){
+
+	public Player(int playerIndex, String playerName){
 		/* kann weggelassen werden, trotzdem noch nicht gel�scht
 		 * this.ipAddress = ipAddress;
 		this.port = port;
@@ -32,12 +41,7 @@ public class Player implements Comparable<Player>{
 		this.playerID = playerIndex;
 		this.playerName = playerName;
 		this.gold = 0;
-		this.turn = turn;
 		
-		//naechste 3 Zeilen werden spaeter von Server gesetzt
-		this.deck = new DeckOfCards(2);
-		this.numOfPlayers = 2;
-		this.players = new ArrayList<Player>();
 		
 		this.muellerin = new ArrayList<Integer>();
 		this.brauer = new ArrayList<Integer>();
@@ -48,17 +52,30 @@ public class Player implements Comparable<Player>{
 		this.adlige = new ArrayList<Integer>();
 		this.lazarett = new ArrayList<Integer>();
 		
-		//naechste Zeile wird geloescht
-		players.add(this);
+		
 		
 	}
 	
-	public boolean isTurn() {
-		return turn;
+	public int getIndexByname(String pName)
+    {
+        for(Player p : players)
+        {
+            if(p.getPlayerName().equals(pName))
+                return players.indexOf(p);
+        }
+        return -1;
+    }
+	
+	public void setPlayerList(ArrayList<Player> players){
+		this.players = players;
 	}
-
-	public void setTurn(boolean turn) {
-		this.turn = turn;
+	
+	public void setNumOfPlayers(int numOfPlayers){
+		this.numOfPlayers = numOfPlayers;
+	}
+	
+	public void setDeckOfCards(DeckOfCards deck){
+		this.deck = deck;
 	}
 
 	public int getGold(){
@@ -423,22 +440,18 @@ public class Player implements Comparable<Player>{
 		}
 	}
 	
-	public void evaluateWinner(){
+	public Player evaluateWinner(){
 		//Copy actual list of Player to avoid problems with the GUI, which bases on list players
 		ArrayList<Player> playersCopy = new ArrayList<Player>(players);
 		Collections.sort(playersCopy);
-		
+		return playersCopy.get(0);
 		//Liste playersCopy sollte nun angezeigt werden -> Damir/Suvi
 		
 	}
-
-	@Override
-	public int compareTo(Player otherPlayer) {
-		int compareGold=((Player)otherPlayer).getGold();
-        /* For Ascending order*/
-        return this.gold-compareGold;
-	}
-
+	public int compareTo(Player p)
+    {
+        return p.getGold() - this.getGold();
+    }
 	
 	
 	
