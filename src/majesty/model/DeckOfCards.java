@@ -13,6 +13,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 	
 	public class DeckOfCards implements Serializable{
 		
+		/**
+		 * 
+		 */
+		/**
+		 * 
+		 */
 		public static void main (String[] args){
 			DeckOfCards d = new DeckOfCards(NUM_PLAYERS);
 			System.out.println(d.deck.size());
@@ -25,7 +31,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 		private final ArrayList<Card> greenCards = new ArrayList<>();
 		private final ArrayList<Card> redCards = new ArrayList<>();
 	    private final ArrayList<Card> deck = new ArrayList<>();
-	    private final SimpleIntegerProperty cardsRemaining = new SimpleIntegerProperty();
+	    private int cardsRemaining = 0;
 
 	    //TESTZWECK:
 	    private final static int NUM_PLAYERS = 4;
@@ -43,11 +49,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 	    /**
 	     * How many cards are left in the deck?
 	     */
-	    public SimpleIntegerProperty getCardsRemainingProperty() {
+	  /**  public SimpleIntegerProperty getCardsRemainingProperty() {
 	        return cardsRemaining;
-	    }
+	    }*/
 	    public int getCardsRemaining() {
-	    	return cardsRemaining.get();
+	    	return cardsRemaining;
 	    }
 	    
 	    public int getCardOrdinalByIndex(int index){
@@ -188,7 +194,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 	    		deck.subList(0, 7).clear();
 	    	}
 	    	
-	    	cardsRemaining.setValue(deck.size());
+	    	//cardsRemaining.setValue(deck.size());
 	    }
 
 	    /**
@@ -198,15 +204,15 @@ import javafx.beans.property.SimpleIntegerProperty;
 	     */
 	    public Card dealCard() {
 	        Card card = (deck.size() > 0) ? deck.remove(deck.size()-1) : null;
-	        cardsRemaining.setValue(deck.size());
+	        cardsRemaining = deck.size();
 	        return card;
 	    }
 	    
 	    public ArrayList<Card> dealFirstDeckCards() {
 	    	ArrayList<Card> firstCards = new ArrayList<Card>();
-	    	for (int i = 0; i<5; i++) {
+	    	for (int i = 0; i<7; i++) {
 	    		Card card = (deck.size() > 0) ? deck.remove(deck.size()-1) : null;
-	        cardsRemaining.setValue(deck.size());
+	        cardsRemaining = deck.size();
 	         firstCards.add(card);
 	    	}
 	    	return firstCards;

@@ -1,8 +1,14 @@
 package majesty.model;
 
-public class Card {
+import java.io.Serializable;
 
-	    public enum Suit { Muellerin, Brauer, Hexe, Wachen, Soldat, Wirt, Adlige;
+public class Card implements Serializable {
+
+	    /**
+	 * 
+	 */
+
+		public enum Suit { Muellerin, Brauer, Hexe, Wachen, Soldat, Wirt, Adlige;
 	        @Override
 	        public String toString() {
 	            String suit = "";
