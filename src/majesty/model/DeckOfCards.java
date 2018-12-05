@@ -14,10 +14,6 @@ import java.util.ArrayList;
 		/**
 		 * 
 		 */
-		private static final long serialVersionUID = 1L;
-		/**
-		 * 
-		 */
 		/**
 		 * 
 		 */

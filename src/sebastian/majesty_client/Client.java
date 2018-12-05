@@ -8,8 +8,10 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import majesty.model.DeckOfCards;
+import majesty.model.Player;
 
 public class Client implements Serializable{
 
@@ -19,20 +21,33 @@ public class Client implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private PrintWriter writer;
     private BufferedReader reader;
+    private int id;
+    private String name;
+    ArrayList<Player> players;
 
     public void start() throws IOException, ClassNotFoundException {
         System.out.println("Starting client");
         Socket socket = new Socket("localhost", 8888);
         System.out.println("schritt2");
-        
-        ObjectInputStream objIn = new ObjectInputStream(socket.getInputStream());
-        DeckOfCards deck = (DeckOfCards) objIn.readObject();
-        ArrayList<Client> clients = (ArrayList<Client>) objIn.readObject();
-        objIn.close();
 
         writer = new PrintWriter(socket.getOutputStream(), true);
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Your Name?");
+        name = scan.nextLine();
+        writer.println(name);
+        
+        //Client wartet bis ddie ArrayList Player übermittelt wird
+        
+        ObjectInputStream objIn = new ObjectInputStream(socket.getInputStream());
+        players = (ArrayList<Player>) objIn.readObject();
+        //ArrayList<Client> clients = (ArrayList<Client>) objIn.readObject();
+        //objIn.close();
+        
+        this.id = players.get(0).getIndexByname(name);
+        System.out.println("My ID: "+id);
+       
         
         while (!socket.isClosed()) {
             play();
@@ -50,17 +65,23 @@ public class Client implements Serializable{
             System.out.println("It is my turn!");
 
             //next line: send index of picked card
-            writer.println("My turn = hello world");
-        } if(command.equals("Game Finished!")){
-        //TODO End-Methoden aufrufen
+            writer.println("3");
+        } else if(command.equals("Game Finished!")){
+        	players.get(id).bonusDifferentCharacters();
+        	players.get(id).bonusMostCharactersPerLocation();
+        	System.out.println("Game Finished!");
+        	System.out.println("Gold: "+players.get(id).getGold());
+        
         }
         
         else {
         	String[] commands = command.split(",");
-        	int currentActivePlayer = Integer.parseInt(commands[0]);
-        	int pickedCard = Integer.parseInt(commands[1]);
+        	int pickedCard = Integer.parseInt(commands[0]);
+        	int currentActivePlayer = Integer.parseInt(commands[1]);
         	//TODO MePickCard und OtherPickCard aufrufen
-            System.out.println("Board has been updated by server");
+        	players.get(id).mePickCard(pickedCard, currentActivePlayer);
+        	
+            System.out.println("Board has been updated by server"+currentActivePlayer+pickedCard);
             //TODO update board
         }
     }
