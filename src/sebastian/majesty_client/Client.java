@@ -67,6 +67,7 @@ public class Client implements Serializable{
         	players.get(id).bonusMostCharactersPerLocation();
         	System.out.println("Game Finished!");
         	System.out.println("Gold: "+players.get(id).getGold());
+        	System.out.println("Winner: "+players.get(id).evaluateWinner().getPlayerName());
         
         }
         
