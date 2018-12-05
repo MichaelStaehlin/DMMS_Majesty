@@ -69,6 +69,10 @@ public abstract class Message {
     		return name + "=" + value;
     	}
     }
+    
+    protected static class PalyerInformations {
+    	
+    }
 
     /**
      * Constructor to create a new message
