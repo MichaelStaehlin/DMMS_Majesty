@@ -440,22 +440,18 @@ public class Player implements Comparable<Player>,Serializable{
 		}
 	}
 	
-	public void evaluateWinner(){
+	public Player evaluateWinner(){
 		//Copy actual list of Player to avoid problems with the GUI, which bases on list players
 		ArrayList<Player> playersCopy = new ArrayList<Player>(players);
 		Collections.sort(playersCopy);
-		
+		return playersCopy.get(0);
 		//Liste playersCopy sollte nun angezeigt werden -> Damir/Suvi
 		
 	}
-
-	@Override
-	public int compareTo(Player otherPlayer) {
-		int compareGold=((Player)otherPlayer).getGold();
-        /* For Ascending order*/
-        return this.gold-compareGold;
-	}
-
+	public int compareTo(Player p)
+    {
+        return p.getGold() - this.getGold();
+    }
 	
 	
 	
