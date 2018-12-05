@@ -70,7 +70,7 @@ public class Game {
         String stringActivePlayer = Integer.toString(currentActivePlayer);
         
         for (Client client : clients) {
-            client.getWriter().println(stringCardIndex+stringActivePlayer); //TODO send new board state to all clients
+            client.getWriter().println(stringCardIndex+","+stringActivePlayer); //TODO send new board state to all clients
         }
     }
 
