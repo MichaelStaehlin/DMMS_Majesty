@@ -65,9 +65,12 @@ public class Game {
 
     public void updateClients(int cardIndex) throws IOException {
         System.out.println("Sending index of picked Card to all clients");
-
+        
+        String stringCardIndex = Integer.toString(cardIndex);
+        String stringActivePlayer = Integer.toString(currentActivePlayer);
+        
         for (Client client : clients) {
-            client.getWriter().println("Hello world"); //TODO send new board state to all clients
+            client.getWriter().println(stringCardIndex+stringActivePlayer); //TODO send new board state to all clients
         }
     }
 

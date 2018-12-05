@@ -16,6 +16,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 		/**
 		 * 
 		 */
+		private static final long serialVersionUID = 1L;
+		/**
+		 * 
+		 */
 		/**
 		 * 
 		 */
