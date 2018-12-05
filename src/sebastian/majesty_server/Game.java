@@ -41,8 +41,9 @@ public class Game {
         }
     	
         while (!gameFinished()) {
-        	if(currentActivePlayer>=clients.size())
+        	if(currentActivePlayer>=clients.size()){
         		currentActivePlayer = 0;
+        	}
         	processInput(clients.get(currentActivePlayer)); //TODO decide which client is next
             currentActivePlayer++;
             roundCounter++;

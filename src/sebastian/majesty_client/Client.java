@@ -19,6 +19,7 @@ public class Client implements Serializable{
     private BufferedReader reader;
     private int id;
     private String name;
+    ArrayList<Player> players;
 
     public void start() throws IOException, ClassNotFoundException {
         System.out.println("Starting client");
@@ -36,7 +37,7 @@ public class Client implements Serializable{
         //Client wartet bis ddie ArrayList Player übermittelt wird
         
         ObjectInputStream objIn = new ObjectInputStream(socket.getInputStream());
-        ArrayList<Player> players = (ArrayList<Player>) objIn.readObject();
+        players = (ArrayList<Player>) objIn.readObject();
         //ArrayList<Client> clients = (ArrayList<Client>) objIn.readObject();
         //objIn.close();
         
@@ -62,15 +63,20 @@ public class Client implements Serializable{
             //next line: send index of picked card
             writer.println("3");
         } else if(command.equals("Game Finished!")){
-        System.out.println("Game Finished!");
+        	players.get(id).bonusDifferentCharacters();
+        	players.get(id).bonusMostCharactersPerLocation();
+        	System.out.println("Game Finished!");
+        	System.out.println("Gold: "+players.get(id).getGold());
         
         }
         
         else {
         	String[] commands = command.split(",");
-        	int currentActivePlayer = Integer.parseInt(commands[0]);
-        	int pickedCard = Integer.parseInt(commands[1]);
+        	int pickedCard = Integer.parseInt(commands[0]);
+        	int currentActivePlayer = Integer.parseInt(commands[1]);
         	//TODO MePickCard und OtherPickCard aufrufen
+        	players.get(id).mePickCard(pickedCard, currentActivePlayer);
+        	
             System.out.println("Board has been updated by server"+currentActivePlayer+pickedCard);
             //TODO update board
         }
