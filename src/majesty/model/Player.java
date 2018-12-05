@@ -13,6 +13,14 @@ public class Player implements Comparable<Player>{
 	private int numOfPlayers;
 	private String playerName;
 	ArrayList<Player> players;
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
 	ArrayList<Integer> muellerin;
 	ArrayList<Integer> brauer;
 	ArrayList<Integer> hexe;

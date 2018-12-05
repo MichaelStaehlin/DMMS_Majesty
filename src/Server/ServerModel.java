@@ -1,7 +1,10 @@
 package Server;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,14 +13,17 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.concurrent.Task;
+import majesty.model.DeckOfCards;
 
 public class ServerModel {
 	ServerSocket server;
     private Integer port;
+    private DeckOfCards deck;
     private final Logger logger = Logger.getLogger("");
     public static int NUM_OF_CLIENTS= 0;
     public static int getNUM_OF_CLIENTS() {
 		return NUM_OF_CLIENTS;
+		
 	}
     String ip;
 	public static void setNUM_OF_CLIENTS(int nUM_OF_CLIENTS) {
@@ -67,6 +73,16 @@ public class ServerModel {
         }
 
 		private void sendClientStartMsg() {
+			
+			deck.createFinalDeck(NUM_OF_CLIENTS);
+						
+			
+			for (int i = 0; i < NUM_OF_CLIENTS; i++) {
+		
+				ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(clientName.get(i).getOutputStream()));
+				out.writeObject(deck);
+			}
+			
 			
 			
 		}

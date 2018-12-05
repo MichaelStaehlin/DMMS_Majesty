@@ -228,13 +228,7 @@ public class ClientView {
    
     	root.setBottom(locations);
     	
-    	root.setLeft(btnHello);
-    	
-    	 
-    	 
-    	 
-    	
-    	 
+    	root.setLeft(btnHello); 	 
     	 
     	 
     	 
