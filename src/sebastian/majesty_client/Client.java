@@ -8,8 +8,10 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import majesty.model.DeckOfCards;
+import majesty.model.Player;
 
 public class Client implements Serializable{
 
@@ -21,13 +23,26 @@ public class Client implements Serializable{
         Socket socket = new Socket("localhost", 8888);
         System.out.println("schritt2");
         
-        ObjectInputStream objIn = new ObjectInputStream(socket.getInputStream());
-        DeckOfCards deck = (DeckOfCards) objIn.readObject();
-        ArrayList<Client> clients = (ArrayList<Client>) objIn.readObject();
-        objIn.close();
+        /**
+         * TEST
+         * 
+         */
+        
 
         writer = new PrintWriter(socket.getOutputStream(), true);
         reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        
+        Scanner scan = new Scanner(System.in);
+        String name = scan.nextLine();
+        writer.println(name);
+        
+        //Client wartet bis ddie ArrayList Player übermittelt wird
+        
+        ObjectInputStream objIn = new ObjectInputStream(socket.getInputStream());
+        ArrayList<Player> players = (ArrayList<Player>) objIn.readObject();
+        //ArrayList<Client> clients = (ArrayList<Client>) objIn.readObject();
+        //objIn.close();
+
         
         
         while (!socket.isClosed()) {
@@ -46,9 +61,10 @@ public class Client implements Serializable{
             System.out.println("It is my turn!");
 
             //next line: send index of picked card
-            writer.println("My turn = hello world");
-        } if(command.equals("Game Finished!")){
-        //TODO End-Methoden aufrufen
+            writer.println("3");
+        } else if(command.equals("Game Finished!")){
+        System.out.println("Game Finished!");
+        
         }
         
         else {
@@ -56,7 +72,7 @@ public class Client implements Serializable{
         	int currentActivePlayer = Integer.parseInt(commands[0]);
         	int pickedCard = Integer.parseInt(commands[1]);
         	//TODO MePickCard und OtherPickCard aufrufen
-            System.out.println("Board has been updated by server");
+            System.out.println("Board has been updated by server"+currentActivePlayer+pickedCard);
             //TODO update board
         }
     }
