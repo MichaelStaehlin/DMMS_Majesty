@@ -1,32 +1,33 @@
 package Server;
 
-import java.io.IOException;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-import Commons.Message;
-import Commons.MessageType;
-import Commons.Message_Error;
-import Commons.Message_Goodbye;
-import Commons.Message_Hello;
-import Commons.Message_NewCustomer;
-import Commons.Message_NewCustomerAccepted;
-import Commons.Message_StartGame;
-import majesty.model.Player;
-
-public class ServerThreadForClient extends Thread {
-    private final Logger logger = Logger.getLogger("");
+public class ServerThreadForClient extends Thread implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final Logger logger = Logger.getLogger("");
     private Socket clientSocket;
     private static int roundCounter;
     private boolean playerTurn;
+    
 
-    public ServerThreadForClient(Socket clientSocket) {
+    public Socket getClientSocket() {
+		return clientSocket;
+	}
+
+	public void setClientSocket(Socket clientSocket) {
+		this.clientSocket = clientSocket;
+	}
+
+	public ServerThreadForClient(Socket clientSocket)  {
         this.clientSocket = clientSocket;
     }
 
-    /**
-     * Process messages until the client says "Goodbye"
-     */
+   
     @Override
     public void run() {
         logger.info("Request from client " + clientSocket.getInetAddress().toString()
@@ -50,7 +51,7 @@ public class ServerThreadForClient extends Thread {
     }
     */
         	
-        
+    };     
     
     private String processMessage(String information) {
 		logger.info("Message received from client: "+ information.toString());
@@ -59,13 +60,10 @@ public class ServerThreadForClient extends Thread {
 		if (gameIsnoStarted()==true) {
 			
 		}
-		
-		if ()
 
-		String plOut = null;
+		String i = information;
 		
-		
-    	return msgOut;
+    	return i;
     }
 
 private boolean gameIsnoStarted() {
@@ -74,3 +72,4 @@ private boolean gameIsnoStarted() {
 	return false;
 }
 }
+

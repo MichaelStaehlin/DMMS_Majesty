@@ -1,5 +1,9 @@
 package majesty.Controller;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
 import Commons.Message_ReadyToStart;
 import Server.ServerModel;
 import javafx.application.Platform;
@@ -22,6 +26,7 @@ public class ClientController {
     
 	final private ClientModel model;
     final private ClientView view;
+    private Socket socket;
     
     public ClientController(ClientModel model, ClientView view) {
         this.model = model;
@@ -35,14 +40,31 @@ public class ClientController {
                 String ip = view.getTxtIP().getText();
                 Integer port = new Integer(8080);
                 System.out.println("Client "+port+"\n"+ip);
+                model.connect(ip, port);
                 
                 // erster Spieler wartet im Splashscreen
-                if (model.getPlayerList().size()==0) {
+               // if (model.getPlayerList().size()==0) {
                 	String clientName =view.getTxtClientName().getText();
                 	Player firstPlayer = new Player(0, clientName , true);
+                	
                 	model.getPlayerList().add(firstPlayer);
-                	Message_ReadyToStart ready = new Message_ReadyToStart();
-                	//ready.send(model.getPlayerList().get(i));
+                	
+               // }
+                
+                	
+                	 ObjectOutputStream out;
+					try {
+						out = new ObjectOutputStream(model.getSocket().getOutputStream());
+						out.writeObject(firstPlayer); 
+						out.flush();
+						model.getSocket().shutdownOutput();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}           
+                	            
+                	 
+                
                 	
                 	
                 	if(model.getPlayerList().size()==1) {
@@ -58,14 +80,15 @@ public class ClientController {
                 	}
                 	
                 	
-                }
+                
+        
                 
                 
-             // Wenn 2 Spieler erreicht
+             /* Wenn 2 Spieler erreicht
 
                 if (model.getPlayerList().size()==2) {
-                	String clientName =view.getTxtClientName().getText();
-                	Player secondPlayer = new Player(1, clientName , false);
+                	String clientName2 =view.getTxtClientName().getText();
+                	Player secondPlayer = new Player(1, clientName, false);
                 	// Splashscreen schliessen
                 	System.out.println("zweiter Spieler");
                 	
@@ -74,7 +97,7 @@ public class ClientController {
                 	
                 	
                 }
-                
+               */ 
                 //no
                 
                 

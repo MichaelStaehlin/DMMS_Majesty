@@ -13,7 +13,11 @@ import majesty.model.DeckOfCards;
 
 public class Client implements Serializable{
 
-    private PrintWriter writer;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private PrintWriter writer;
     private BufferedReader reader;
 
     public void start() throws IOException, ClassNotFoundException {
