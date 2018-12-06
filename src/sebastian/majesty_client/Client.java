@@ -59,7 +59,7 @@ public class Client implements Serializable{
         //TODO make this more resilient
         if (command.equals("Your turn!")) {
             System.out.println("It is my turn!");
-
+            
             //next line: send index of picked card
             writer.println("3");
         } else if(command.equals("Game Finished!")){
