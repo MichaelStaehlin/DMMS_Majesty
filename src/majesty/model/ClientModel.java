@@ -17,14 +17,14 @@ import Server.ServerThreadForClient;
 
 public class ClientModel {
     String ipAddress;
-    Integer port;
+    Integer port, indexInGame;
     Socket socket;
     ArrayList<Player> playerList = new ArrayList<Player>();
 	private PrintWriter writer;
     private BufferedReader reader;
     
-    public Player generateThisPlayer(int id, String name, boolean turn) {
-    	Player thisPlayer = new Player (id, name, turn);
+    public Player generateThisPlayer(int id, String name) {
+    	Player thisPlayer = new Player (id, name);
     	return thisPlayer;
     }
     
@@ -159,6 +159,16 @@ public class ClientModel {
 
 	public void setSocket(Socket socket) {
 		this.socket = socket;
+	}
+
+
+	public Integer getIndexInGame() {
+		return indexInGame;
+	}
+
+
+	public void setIndexInGame(Integer indexInGame) {
+		this.indexInGame = indexInGame;
 	}
 
 

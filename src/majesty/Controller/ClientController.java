@@ -1,8 +1,10 @@
 package majesty.Controller;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import Commons.Message_ReadyToStart;
 import Server.ServerModel;
@@ -27,6 +29,8 @@ public class ClientController {
 	final private ClientModel model;
     final private ClientView view;
     private Socket socket;
+    private ArrayList<Player>playerList;
+    private String name; 
     
     public ClientController(ClientModel model, ClientView view) {
         this.model = model;
@@ -39,19 +43,40 @@ public class ClientController {
             	int i = 0;
                 String ip = view.getTxtIP().getText();
                 Integer port = new Integer(8080);
+                name = view.getTxtClientName().getText();
                 System.out.println("Client "+port+"\n"+ip);
                 model.connect(ip, port);
                 
+                // Players alle bekannt
+                ObjectInputStream objIn;
+				try {
+					objIn = new ObjectInputStream(socket.getInputStream());
+					playerList = (ArrayList<Player>) objIn.readObject();
+                model.setPlayerList(playerList);
+				} catch (IOException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                
+                
+                
+                
+                model.setIndexInGame(getIndexofPlayer());
+                
+                
+                
+               // model.getPlayerList() = new InputStream;
+                
                 // erster Spieler wartet im Splashscreen
                // if (model.getPlayerList().size()==0) {
-                	String clientName =view.getTxtClientName().getText();
-                	Player firstPlayer = new Player(0, clientName , true);
+              //  	String clientName =view.getTxtClientName().getText();
+                //	Player firstPlayer = new Player(0, );
                 	
-                	model.getPlayerList().add(firstPlayer);
+                
                 	
                // }
                 
-                	
+                	/*
                 	 ObjectOutputStream out;
 					try {
 						out = new ObjectOutputStream(model.getSocket().getOutputStream());
@@ -81,7 +106,7 @@ public class ClientController {
                 	
                 	
                 
-        
+        */
                 
                 
              /* Wenn 2 Spieler erreicht
@@ -115,6 +140,23 @@ public class ClientController {
                view.getTxtMessages().setText("Initialized");
                 
             }
+
+			private Integer getIndexofPlayer() {
+				// TODO Auto-generated method stub
+				
+				for (int i=0; i<model.getPlayerList().size(); i++) {
+					
+					if (model.getPlayerList().get(i).getPlayerName().equals(name)) {
+						
+						return i;
+						
+					}
+					
+				}
+				
+				
+				return null;
+			}
             
              
             

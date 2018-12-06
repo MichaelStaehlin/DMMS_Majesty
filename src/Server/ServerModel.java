@@ -18,12 +18,13 @@ import majesty.model.DeckOfCards;
 
 public class ServerModel {
 	ServerSocket server;
-    private Integer port;private Socket clientSocket;
+    private Integer port;private Socket clientSocket;private static int indexCounter = 0;
     private DeckOfCards deck;
     private final Logger logger = Logger.getLogger("");
     public static int NUM_OF_CLIENTS= 0;
     public static int getNUM_OF_CLIENTS() {
 		return NUM_OF_CLIENTS;
+	
 		
 	}
     String ip;
@@ -52,15 +53,17 @@ public class ServerModel {
                     // The "accept" method waits for a request, then creates a socket
                     // connected to the requesting client
                      clientSocket = server.accept();
+                     indexCounter++;
                     //testing
                    System.out.println("verbunden"); 
                     
                     ServerThreadForClient client = new ServerThreadForClient(clientSocket);
-                    clientName.add(client);
-                    System.out.println("Hallo"+clientSocket);
+                   clientName.add(client);
+                   String name = clientName.get(indexCounter).getReader().readLine();
+                   System.out.println("Hallo"+clientSocket);
                     client.start();
                     NUM_OF_CLIENTS++;
-                    getPlayerInformations();
+                    setPlayerInformations();
                     if (NUM_OF_CLIENTS==2) {
                     	System.out.println("2 Spieler drin");
                     	sendClientStartMsg();
@@ -76,7 +79,7 @@ public class ServerModel {
 
 		private Player getPlayerInformations() {
 			// TODO Auto-generated method stub
-			InputStream firstInput = new InputStreamReader(in)
+			InputStream firstInput = new InputStreamReader(in);
 		}
 
 		private void sendClientStartMsg() throws IOException {
@@ -85,6 +88,7 @@ public class ServerModel {
 						
 			
 			for (int i = 0; i < NUM_OF_CLIENTS; i++) {
+				
 				
 				ObjectOutputStream out = new ObjectOutputStream(clientName.get(i).getClientSocket().getOutputStream());
 				out.writeObject(deck);
