@@ -28,7 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Willkomen extends Application implements EventHandler<ActionEvent> {
+public class Willkomen extends Application {
 
 	Stage window, window2;
 	Scene scene1, scene2;
@@ -45,7 +45,7 @@ public class Willkomen extends Application implements EventHandler<ActionEvent> 
 		Font style = Font.font("Cambria", 15);
 
 		TextField textname = new TextField();
-		textname.setPromptText("gib hier dein Spielername ein");
+		textname.setPromptText("geben Sie hier dein Spielername ein");
 		
 		TextField IpAd = new TextField();
 		IpAd.setPromptText("geben Sie die IP-Adresse ein");
@@ -92,10 +92,10 @@ public class Willkomen extends Application implements EventHandler<ActionEvent> 
 		});
 
 		create = new Button();
-		create.setText("create Player");
+		create.setText("Spiel starten...");
 
 		exit = new Button();
-		exit.setText("Exit");
+		exit.setText("Verlassen");
 
 		GridPane layout1 = new GridPane();
 	
@@ -177,7 +177,7 @@ public class Willkomen extends Application implements EventHandler<ActionEvent> 
 	}
 
 	private void closeProgram() {
-		Boolean answer = ConfirmBox.display("Fenster schliessen?", "Möchten Sie das Fenster wirklich schliessen?");
+		Boolean answer = ConfirmBox.display("Fenster schliessen?", "Wollen Sie das Fenster wirklich schliessen?");
 		if (answer)
 			window.close();
 	}
