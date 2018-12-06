@@ -63,7 +63,7 @@ public class Client implements Serializable{
         //TODO make this more resilient
         if (command.equals("Your turn!")) {
             System.out.println("It is my turn!");
-
+            
             //next line: send index of picked card
             writer.println("3");
         } else if(command.equals("Game Finished!")){
@@ -71,8 +71,12 @@ public class Client implements Serializable{
         	players.get(id).bonusMostCharactersPerLocation();
         	System.out.println("Game Finished!");
         	System.out.println("Gold: "+players.get(id).getGold());
-        	System.out.println("Winner: "+players.get(id).evaluateWinner().getPlayerName());
-        
+        	if(players.get(id).evaluateWinner().getPlayerName().equalsIgnoreCase(players.get(id).getPlayerName())){
+        		System.out.println("You are the winner!");
+        	} else{
+        		System.out.println("Winner: "+players.get(id).evaluateWinner().getPlayerName());
+        	}
+        		
         }
         
         else {
