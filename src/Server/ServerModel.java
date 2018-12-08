@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 import javafx.concurrent.Task;
 import majesty.model.DeckOfCards;
+import majesty.model.Player;
 
 public class ServerModel {
 	ServerSocket server;
@@ -22,8 +23,12 @@ public class ServerModel {
     private DeckOfCards deck;
     private final Logger logger = Logger.getLogger("");
     public static int NUM_OF_CLIENTS= 0;
+    private ArrayList<Player> players;
+    
+    
     public static int getNUM_OF_CLIENTS() {
 		return NUM_OF_CLIENTS;
+		
 	
 		
 	}
@@ -43,7 +48,7 @@ public class ServerModel {
         	
             try {
             	
-                server = new ServerSocket(port, 4);
+                server = new ServerSocket(port, 10);
                 logger.info("Listening on port " + port);
                 InetAddress iAddress = InetAddress.getLocalHost();
                 
@@ -53,19 +58,36 @@ public class ServerModel {
                     // The "accept" method waits for a request, then creates a socket
                     // connected to the requesting client
                      clientSocket = server.accept();
-                     indexCounter++;
+                    
+                     
+                     
                     //testing
                    System.out.println("verbunden"); 
                     
                     ServerThreadForClient client = new ServerThreadForClient(clientSocket);
                    clientName.add(client);
-                   String name = clientName.get(indexCounter).getReader().readLine();
-                   System.out.println("Hallo"+clientSocket);
+                    indexCounter++;
+                    String name = clientName.get(indexCounter-1).getReader().readLine();
+                    System.out.println("Hallo"+clientSocket);
+                    Player xy = new Player((indexCounter-1), name);
+                    players.add(xy); 
+                  
                     client.start();
+                    
+                    
+                                      
+                    
+                    
+                    
                     NUM_OF_CLIENTS++;
-                    setPlayerInformations();
+                    
                     if (NUM_OF_CLIENTS==2) {
                     	System.out.println("2 Spieler drin");
+                    	for(Player p : players){
+                        	p.setDeckOfCards(deck);
+                        	p.setNumOfPlayers(players.size());
+                        	p.setPlayerList(players);
+                        }
                     	sendClientStartMsg();
                     }
                 }
@@ -77,10 +99,21 @@ public class ServerModel {
             return null;
         }
 
-		private Player getPlayerInformations() {
+		private void setPlayerInformations() {
 			// TODO Auto-generated method stub
-			InputStream firstInput = new InputStreamReader(in);
+			
+			
 		}
+
+		private void getPlayertName() {
+			// TODO Auto-generated method stub
+			
+			
+			
+			
+		}
+
+
 
 		private void sendClientStartMsg() throws IOException {
 			
@@ -91,6 +124,7 @@ public class ServerModel {
 				
 				
 				ObjectOutputStream out = new ObjectOutputStream(clientName.get(i).getClientSocket().getOutputStream());
+				out.writeObject(players);
 				out.writeObject(deck);
 				
 			}

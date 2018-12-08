@@ -2,11 +2,10 @@ package majesty.Controller;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import Commons.Message_ReadyToStart;
 import Server.ServerModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -31,6 +30,7 @@ public class ClientController {
     private Socket socket;
     private ArrayList<Player>playerList;
     private String name; 
+    private PrintWriter  writer;
     
     public ClientController(ClientModel model, ClientView view) {
         this.model = model;
@@ -40,29 +40,55 @@ public class ClientController {
         view.getBtnGo().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	int i = 0;
+            	
                 String ip = view.getTxtIP().getText();
                 Integer port = new Integer(8080);
                 name = view.getTxtClientName().getText();
                 System.out.println("Client "+port+"\n"+ip);
                 model.connect(ip, port);
+
+                
+                
+                try {
+					writer = new PrintWriter(model.getSocket().getOutputStream(), true);
+					writer.write(name);
+					System.out.println();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+               
+                
+                
+                		
                 
                 // Players alle bekannt
                 ObjectInputStream objIn;
 				try {
-					objIn = new ObjectInputStream(socket.getInputStream());
-					playerList = (ArrayList<Player>) objIn.readObject();
-                model.setPlayerList(playerList);
+					objIn = new ObjectInputStream(model.getSocket().getInputStream());
+					
+						Splash.displaySplash();
+						playerList = (ArrayList<Player>) objIn.readObject();
+						model.setPlayerList(playerList);
+						
+						
+					
+						
 				} catch (IOException | ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				};
+                
+               
+                
+				// Spiel stage startet
                 
                 
-                
-                
+                // Spieler weiss welcher Index sein ist
                 model.setIndexInGame(getIndexofPlayer());
                 
+                
+             
                 
                 
                // model.getPlayerList() = new InputStream;
@@ -136,10 +162,12 @@ public class ClientController {
                 
                 
                 
-                model.init(ip, port);
+              
                view.getTxtMessages().setText("Initialized");
                 
             }
+            
+            
 
 			private Integer getIndexofPlayer() {
 				// TODO Auto-generated method stub
@@ -168,7 +196,7 @@ public class ClientController {
        
        
 
-        // register ourselves to listen for button clicks
+        /* register ourselves to listen for button clicks
         view.getBtnHello().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -197,9 +225,9 @@ public class ClientController {
             }
         });
         
+        */
         
-        
-
+       
         // register ourselves to handle window-closing event
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -209,4 +237,6 @@ public class ClientController {
             }
         });
     }
+    
+    
 }

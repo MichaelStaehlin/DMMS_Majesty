@@ -65,7 +65,7 @@ public class ClientView {
     private Timer tm= new Timer();
     
     
-    protected TextArea txtMessages = new TextArea();
+    
     
     public ClientView(Stage stage, ClientModel model) {
         this.stage1 = stage;
@@ -161,7 +161,7 @@ public class ClientView {
     	
     	Stage PlayerStage = new Stage();
     	this.stage3 = PlayerStage;
-    	BoardView bv = new BoardView(stage3);
+    	PlayerBoard bv = new PlayerBoard(stage3);
     	BorderPane root = new BorderPane();
     	//HBox hboxCards = new HBox();
     	/*DeckOfCards wholeDeck = new DeckOfCards(2);

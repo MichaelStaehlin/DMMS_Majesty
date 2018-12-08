@@ -3,6 +3,7 @@ package majesty.model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.URL;
@@ -22,6 +23,7 @@ public class ClientModel {
     ArrayList<Player> playerList = new ArrayList<Player>();
 	private PrintWriter writer;
     private BufferedReader reader;
+    private ObjectInputStream input;
     
     public Player generateThisPlayer(int id, String name) {
     	Player thisPlayer = new Player (id, name);
@@ -54,7 +56,9 @@ public class ClientModel {
 	    return socket;
 	}
 	
-	public String sayHello(String clientName) {
+	
+	
+	/*public String sayHello(String clientName) {
         String result = null;
 	    Socket socket = connect();
 	    if (socket != null) {
@@ -111,7 +115,7 @@ public class ClientModel {
         }
 		return result;
 	}
-	
+	*/
 	
 	
 	public DeckOfCards getGeneratedDeckFromServer (DeckOfCards sDeck) {
@@ -169,6 +173,16 @@ public class ClientModel {
 
 	public void setIndexInGame(Integer indexInGame) {
 		this.indexInGame = indexInGame;
+	}
+
+
+	public ObjectInputStream getInput() {
+		return input;
+	}
+
+
+	public void setInput(ObjectInputStream input) {
+		this.input = input;
 	}
 
 
