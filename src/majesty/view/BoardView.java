@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import majesty.model.Player;
+import youtube.DeckOfCards;
 import youtube.TableViewProductClass;
 
 public class BoardView {
@@ -37,6 +38,8 @@ public class BoardView {
 	public ArrayList<Button> btnListCharacters;
 	public ArrayList<Button> btnListLocations;
 	public ArrayList<Button> btnGoldCounter;
+	public ArrayList<TableView> tblPlayers;
+	public ArrayList<VBox> vBoxTableList;
 	public Button btnFinishRound, btnQuit, button5;
 	Reflection reflectionFx = new Reflection();
 	DropShadow dropShadowFx = new DropShadow();
@@ -67,29 +70,44 @@ public class BoardView {
 				
 //--------------------------------------------------------------------------
 // TableColumn Spieler, Gold, Rang	
-		TableColumn<Player, Integer> nameColumn = new TableColumn<>("PlayerIndex: ");
-		nameColumn.setMinWidth(200);
-		nameColumn.setCellValueFactory(new PropertyValueFactory<>("playerIndex"));
-		
-		//Price column
-		TableColumn<Player, String> priceColumn = new TableColumn<>("PlayerName: ");
-		priceColumn.setMinWidth(100);
-		priceColumn.setCellValueFactory(new PropertyValueFactory<>("playerName"));
-		
-		//Quantity Column	
-		TableColumn<Player, Boolean> quantityColumn = new TableColumn<>("Turn: ");
-		quantityColumn.setMinWidth(100);
-		quantityColumn.setCellValueFactory(new PropertyValueFactory<>("turn"));	
+				//HBox Table
+				hBoxTableView = new HBox(10);
+				hBoxTableView.setPadding(new Insets(30,700,30,50));
+			
+				Player d = new Player(1, "Damir", 5);
+				DeckOfCards deck = new DeckOfCards(2);
+				
+				tblPlayers = new ArrayList<>();
+				
+			for(int i = 0; i <=deck.getNumOfPlayer(); i++) {
+					
+				TableColumn<String, String> nameColumn = new TableColumn<>(d.getPlayerName());
+				nameColumn.setMinWidth(100);
+				nameColumn.setCellValueFactory(new PropertyValueFactory<>(""));
+				
+			
+				
+				//Quantity Column	
+				TableColumn<Integer, Integer> quantityColumn = new TableColumn<>("Rang: ");
+				quantityColumn.setMinWidth(100);
+				quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));	
 		//tableView
-				TableView table = new TableView();
-				table.setItems(getTableList());
-				table.getColumns().addAll(nameColumn, priceColumn, quantityColumn);
+				
+				tblPlayers.add(new TableView());
+				tblPlayers.get(i).setItems(getTableList());
+				tblPlayers.get(i).getColumns().addAll(nameColumn, quantityColumn);
 			
 		//VBox Table
-				vBoxTableView = new VBox(20);
-				vBoxTableView.setMinSize(100, 100);
-				vBoxTableView.getChildren().addAll(table);
-				vBoxTableView.setEffect(dropShadowFx);
+				
+				vBoxTableList = new ArrayList<>();
+				for(int e = 0; e < i; e++) {
+					vBoxTableList.add(new VBox(10));
+					vBoxTableList.get(e).setMinSize(100, 100);
+					vBoxTableList.get(e).getChildren().addAll(tblPlayers.get(i));
+				hBoxTableView.getChildren().addAll(vBoxTableList.get(e));
+					}	
+				}
+				GridPane.setConstraints(hBoxTableView, 0, 0);
 				
 				Button deckBackGreen = new Button();
 				deckBackGreen.setMinSize(120, 220);
@@ -295,13 +313,13 @@ public class BoardView {
 			return currentPlayerList;
 		}
 	private ObservableList<Player> setTableList(int s) {
-		ObservableList<Player> currentPlayerList = FXCollections.observableArrayList();
-		currentPlayerList.add(new Player(s, "Damir", true));
-		currentPlayerList.add(new Player(0, "Damir", false));
-		currentPlayerList.add(new Player(0, "Damir", false));
-		currentPlayerList.add(new Player(0, "Damir", false));
-	
-		return currentPlayerList;
+			ObservableList<Player> currentPlayerList = FXCollections.observableArrayList();
+			currentPlayerList.add(new Player(s, "Damir", true));
+			currentPlayerList.add(new Player(0, "Damir", false));
+			currentPlayerList.add(new Player(0, "Damir", false));
+			currentPlayerList.add(new Player(0, "Damir", false));
+		
+			return currentPlayerList;
 	}
 
 }
