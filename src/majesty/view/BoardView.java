@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import majesty.model.ClientModel;
 import majesty.model.Player;
 
 public class BoardView {
@@ -28,11 +29,11 @@ public class BoardView {
 	public ArrayList<Button> btnListCharacters;
 	public ArrayList<Button> btnListLocations;
 	public Button btnFinishRound, btnQuit;
-
+	public ClientModel model;
 	
 	
-	public BoardView(Stage primaryStage) {
-			
+	public BoardView(Stage primaryStage, ClientModel model) {
+			this.model = model;
 //Windows	
 		this.windows = primaryStage;
 		windows.setTitle("GridPane");
@@ -154,10 +155,9 @@ public class BoardView {
 // Rangliste Methode
 	private ObservableList<Player> getTableList() {
 			ObservableList<Player> currentPlayerList = FXCollections.observableArrayList();
-			currentPlayerList.add(new Player(0, "Damir", true));
-			currentPlayerList.add(new Player(0, "Damir", true));
-			currentPlayerList.add(new Player(0, "Damir", true));
-			currentPlayerList.add(new Player(0, "Damir", true));
+			currentPlayerList.add(model.getPlayerList().get(0));
+			currentPlayerList.add(model.getPlayerList().get(1));
+			
 		
 			return currentPlayerList;
 		}

@@ -52,40 +52,35 @@ public class ClientController {
                 try {
 					writer = new PrintWriter(model.getSocket().getOutputStream(), true);
 					writer.write(name);
-					System.out.println();
+					System.out.println("Name übergeben");
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
                
                 
+               System.out.println("Wartet auf Spielerliste"); 
+               
+               Platform.runLater(() -> {
+               model.getPlayerListInput(model.getSocket());  
+              
+            	   view.initPlayerBoard();
+               
+               });
+               
                 
-                		
-                
-                // Players alle bekannt
-                ObjectInputStream objIn;
-				try {
-					objIn = new ObjectInputStream(model.getSocket().getInputStream());
-					
-						Splash.displaySplash();
-						playerList = (ArrayList<Player>) objIn.readObject();
-						model.setPlayerList(playerList);
-						
-						
-					
-						
-				} catch (IOException | ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				};
+           
                 
                
                 
 				// Spiel stage startet
+            
+               
                 
                 
                 // Spieler weiss welcher Index sein ist
                 model.setIndexInGame(getIndexofPlayer());
+                
                 
                 
              
@@ -161,12 +156,8 @@ public class ClientController {
                 }
                 
                 
-                
-              
-               view.getTxtMessages().setText("Initialized");
-                
+               
             }
-            
             
 
 			private Integer getIndexofPlayer() {
@@ -236,7 +227,13 @@ public class ClientController {
                 Platform.exit();
             }
         });
-    }
     
+    
+    
+  
+  
+  
+  
+    }
     
 }

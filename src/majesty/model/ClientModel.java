@@ -14,6 +14,7 @@ import Commons.Message_Goodbye;
 import Commons.Message_Hello;
 import Commons.Message_NewCustomer;
 import Server.ServerThreadForClient;
+import majesty.view.Splash;
 
 
 public class ClientModel {
@@ -183,6 +184,24 @@ public class ClientModel {
 
 	public void setInput(ObjectInputStream input) {
 		this.input = input;
+	}
+	
+	public void getPlayerListInput (Socket socket) {
+		try {
+			//while ( model.getInput().readObject()!=null) {              
+				 ObjectInputStream objIn = new ObjectInputStream(socket.getInputStream());
+				
+				Splash.displaySplash();
+				playerList = (ArrayList<Player>) objIn.readObject();
+				this.setPlayerList(playerList);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

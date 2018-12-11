@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.concurrent.Task;
 import majesty.model.DeckOfCards;
 import majesty.model.Player;
@@ -24,7 +25,8 @@ public class ServerModel {
     private final Logger logger = Logger.getLogger("");
     public static int NUM_OF_CLIENTS= 0;
     private ArrayList<Player> players;
-    
+    ServerThreadForClient client;
+    private String name;
     
     public static int getNUM_OF_CLIENTS() {
 		return NUM_OF_CLIENTS;
@@ -33,27 +35,28 @@ public class ServerModel {
 		
 	}
     String ip;
-	public static void setNUM_OF_CLIENTS(int nUM_OF_CLIENTS) {
-		NUM_OF_CLIENTS = nUM_OF_CLIENTS;
+	public static void raiseNUM_OF_CLIENTS() {
+		NUM_OF_CLIENTS++;
 	}
 
 	
     public ArrayList<ServerThreadForClient> clientName = new ArrayList<ServerThreadForClient>();
     
 
-	final Task<Void> serverTask = new Task<Void>() {
+	/*final Task<Void> serverTask = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
            
-        	
-            try {
-            	
+        	*/
+    public void startMEthod () throws IOException {
+    	try {
+            	while (clientName.size()<2) {
                 server = new ServerSocket(port, 10);
                 logger.info("Listening on port " + port);
                 InetAddress iAddress = InetAddress.getLocalHost();
                 
                 
-              while (clientName.size()<2) {
+              
             	  System.out.println("Waiting for client to connect...");
                     // The "accept" method waits for a request, then creates a socket
                     // connected to the requesting client
@@ -63,41 +66,56 @@ public class ServerModel {
                      
                     //testing
                    System.out.println("verbunden"); 
-                    
-                    ServerThreadForClient client = new ServerThreadForClient(clientSocket);
-                   clientName.add(client);
-                    indexCounter++;
-                    String name = clientName.get(indexCounter-1).getReader().readLine();
-                    System.out.println("Hallo"+clientSocket);
-                    Player xy = new Player((indexCounter-1), name);
-                    players.add(xy); 
-                  
+                    raiseNUM_OF_CLIENTS();
+                    client = new ServerThreadForClient(clientSocket);
+                    System.out.println("sOLLTE ABGELEGT WERDEN");
                     client.start();
+                   
+                    
+                   clientName.add(client);
+                   System.out.println("Client abgelegt");
+                   
+                      indexCounter++;
+                    System.out.println("KOMMT DAS NOCH?");
+                   
+                   name = client.getReader().readLine();
+                		   //clientName.get(indexCounter).getReader().readLine();
+                   System.out.println("name wird übegeben");    
+                     Player xy = new Player((indexCounter-1), name);
+                     players.add(xy);
+                    
+                 
+             
+                    System.out.println("Hallo"+name);
+                 
+                  
                     
                     
-                                      
+                 
                     
-                    
-                    
-                    NUM_OF_CLIENTS++;
-                    
-                    if (NUM_OF_CLIENTS==2) {
+            	}
+                  if (clientName.size()==2) {
+                    	deck.createFinalDeck(indexCounter);
                     	System.out.println("2 Spieler drin");
                     	for(Player p : players){
                         	p.setDeckOfCards(deck);
                         	p.setNumOfPlayers(players.size());
                         	p.setPlayerList(players);
                         }
+                    
+                    
                     	sendClientStartMsg();
                     }
-                }
+                
             } catch (Exception e) {
                 System.err.println(e);
             } finally {
                 if (server != null) server.close();
             }
-            return null;
-        }
+    }
+            
+           
+        
 
 		private void setPlayerInformations() {
 			// TODO Auto-generated method stub
@@ -117,7 +135,7 @@ public class ServerModel {
 
 		private void sendClientStartMsg() throws IOException {
 			
-			deck.createFinalDeck(NUM_OF_CLIENTS);
+			
 						
 			
 			for (int i = 0; i < NUM_OF_CLIENTS; i++) {
@@ -132,14 +150,15 @@ public class ServerModel {
 			
 			
 		}
-    };
+    
     
     /**
      * Called by the controller, to start the serverSocket task
+     * @throws IOException 
      */
-    public void startServerSocket(Integer port) {
+    public void startServerSocket(Integer port) throws IOException {
         this.port = port;
-        new Thread(serverTask).start();
+        startMEthod();
     }
 
     

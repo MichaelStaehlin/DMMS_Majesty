@@ -18,7 +18,7 @@ public class ServerView {
     private Stage stage;
 
     protected Label lblPort = new Label("Port");
-    protected TextField txtPort = new TextField("2303");
+    protected TextField txtPort = new TextField("8080");
     protected Button btnGo = new Button("Go");
     protected TextArea txtLog = new TextArea();
     
