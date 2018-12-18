@@ -65,7 +65,7 @@ public class ClientView {
     private Timer tm= new Timer();
     
     
-    protected TextArea txtMessages = new TextArea();
+    
     
     public ClientView(Stage stage, ClientModel model) {
         this.stage1 = stage;
@@ -161,8 +161,14 @@ public class ClientView {
     	
     	Stage PlayerStage = new Stage();
     	this.stage3 = PlayerStage;
-    	BoardView bv = new BoardView(stage3);
+    	BoardView bv = new BoardView(stage3, model);
     	BorderPane root = new BorderPane();
+    	 Scene scene = new Scene(root, 500, 500);
+         
+     	
+    	 PlayerStage.setScene(scene);
+    	 PlayerStage.show();
+    	
     	//HBox hboxCards = new HBox();
     	/*DeckOfCards wholeDeck = new DeckOfCards(2);
     	 for (int i = 0; i < 2; i++) {
@@ -354,13 +360,6 @@ public class ClientView {
 		this.btnGoodbye = btnGoodbye;
 	}
 
-	public TextArea getTxtMessages() {
-		return txtMessages;
-	}
-
-	public void setTxtMessages(TextArea txtMessages) {
-		this.txtMessages = txtMessages;
-	}
 
 	public void setStage(Stage stage) {
 		this.stage1 = stage;

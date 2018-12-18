@@ -1,6 +1,11 @@
 package majesty.Controller;
 
-import Commons.Message_ReadyToStart;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.ArrayList;
+
 import Server.ServerModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -22,6 +27,10 @@ public class ClientController {
     
 	final private ClientModel model;
     final private ClientView view;
+    private Socket socket;
+    private ArrayList<Player>playerList;
+    private String name; 
+    private PrintWriter  writer;
     
     public ClientController(ClientModel model, ClientView view) {
         this.model = model;
@@ -31,18 +40,77 @@ public class ClientController {
         view.getBtnGo().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	int i = 0;
+            	
                 String ip = view.getTxtIP().getText();
                 Integer port = new Integer(8080);
+                name = view.getTxtClientName().getText();
                 System.out.println("Client "+port+"\n"+ip);
+                model.connect(ip, port);
+
+                
+                
+                try {
+					writer = new PrintWriter(model.getSocket().getOutputStream(), true);
+					writer.write(name);
+					System.out.println("Name übergeben");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+               
+                
+               System.out.println("Wartet auf Spielerliste"); 
+               
+               Platform.runLater(() -> {
+               model.getPlayerListInput(model.getSocket());  
+              
+            	   view.initPlayerBoard();
+               
+               });
+               
+                
+           
+                
+               
+                
+				// Spiel stage startet
+            
+               
+                
+                
+                // Spieler weiss welcher Index sein ist
+                model.setIndexInGame(getIndexofPlayer());
+                
+                
+                
+             
+                
+                
+               // model.getPlayerList() = new InputStream;
                 
                 // erster Spieler wartet im Splashscreen
-                if (model.getPlayerList().size()==0) {
-                	String clientName =view.getTxtClientName().getText();
-                	Player firstPlayer = new Player(0, clientName , true);
-                	model.getPlayerList().add(firstPlayer);
-                	Message_ReadyToStart ready = new Message_ReadyToStart();
-                	//ready.send(model.getPlayerList().get(i));
+               // if (model.getPlayerList().size()==0) {
+              //  	String clientName =view.getTxtClientName().getText();
+                //	Player firstPlayer = new Player(0, );
+                	
+                
+                	
+               // }
+                
+                	/*
+                	 ObjectOutputStream out;
+					try {
+						out = new ObjectOutputStream(model.getSocket().getOutputStream());
+						out.writeObject(firstPlayer); 
+						out.flush();
+						model.getSocket().shutdownOutput();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}           
+                	            
+                	 
+                
                 	
                 	
                 	if(model.getPlayerList().size()==1) {
@@ -58,14 +126,15 @@ public class ClientController {
                 	}
                 	
                 	
-                }
+                
+        */
                 
                 
-             // Wenn 2 Spieler erreicht
+             /* Wenn 2 Spieler erreicht
 
                 if (model.getPlayerList().size()==2) {
-                	String clientName =view.getTxtClientName().getText();
-                	Player secondPlayer = new Player(1, clientName , false);
+                	String clientName2 =view.getTxtClientName().getText();
+                	Player secondPlayer = new Player(1, clientName, false);
                 	// Splashscreen schliessen
                 	System.out.println("zweiter Spieler");
                 	
@@ -74,7 +143,7 @@ public class ClientController {
                 	
                 	
                 }
-                
+               */ 
                 //no
                 
                 
@@ -87,11 +156,26 @@ public class ClientController {
                 }
                 
                 
-                
-                model.init(ip, port);
-               view.getTxtMessages().setText("Initialized");
-                
+               
             }
+            
+
+			private Integer getIndexofPlayer() {
+				// TODO Auto-generated method stub
+				
+				for (int i=0; i<model.getPlayerList().size(); i++) {
+					
+					if (model.getPlayerList().get(i).getPlayerName().equals(name)) {
+						
+						return i;
+						
+					}
+					
+				}
+				
+				
+				return null;
+			}
             
              
             
@@ -103,7 +187,7 @@ public class ClientController {
        
        
 
-        // register ourselves to listen for button clicks
+        /* register ourselves to listen for button clicks
         view.getBtnHello().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -132,9 +216,9 @@ public class ClientController {
             }
         });
         
+        */
         
-        
-
+       
         // register ourselves to handle window-closing event
         view.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
@@ -143,5 +227,13 @@ public class ClientController {
                 Platform.exit();
             }
         });
+    
+    
+    
+  
+  
+  
+  
     }
+    
 }

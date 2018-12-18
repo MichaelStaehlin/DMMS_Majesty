@@ -23,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import majesty.model.ClientModel;
 import majesty.model.Player;
 import youtube.DeckOfCards;
 import youtube.TableViewProductClass;
@@ -37,6 +38,7 @@ public class BoardView {
 	protected HBox hBoxTableView, hBoxBtnsCharacters, hBoxLocations, hBoxBtnsGreenRed, hBoxGoldCounter ;
 	public ArrayList<Button> btnListCharacters;
 	public ArrayList<Button> btnListLocations;
+<<<<<<< HEAD
 	public ArrayList<Button> btnGoldCounter;
 	public ArrayList<TableView> tblPlayers;
 	public ArrayList<VBox> vBoxTableList;
@@ -45,10 +47,14 @@ public class BoardView {
 	DropShadow dropShadowFx = new DropShadow();
 	private int index;
 
+=======
+	public Button btnFinishRound, btnQuit;
+	public ClientModel model;
+>>>>>>> branch 'master' of https://github.com/MichaelStaehlin/DMMS_Majesty.git
 	
 	
-	public BoardView(Stage primaryStage) {
-			
+	public BoardView(Stage primaryStage, ClientModel model) {
+			this.model = model;
 //Windows	
 		this.windows = primaryStage;
 		windows.setTitle("GridPane");
@@ -305,10 +311,16 @@ public class BoardView {
 // Rangliste Methode
 	private ObservableList<Player> getTableList() {
 			ObservableList<Player> currentPlayerList = FXCollections.observableArrayList();
+<<<<<<< HEAD
 			currentPlayerList.add(new Player(0, "Damir", true));
 			currentPlayerList.add(new Player(0, "Damir", false));
 			currentPlayerList.add(new Player(0, "Damir", false));
 			currentPlayerList.add(new Player(0, "Damir", false));
+=======
+			currentPlayerList.add(model.getPlayerList().get(0));
+			currentPlayerList.add(model.getPlayerList().get(1));
+			
+>>>>>>> branch 'master' of https://github.com/MichaelStaehlin/DMMS_Majesty.git
 		
 			return currentPlayerList;
 		}

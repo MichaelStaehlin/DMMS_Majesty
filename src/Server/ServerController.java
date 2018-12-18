@@ -1,5 +1,7 @@
 package Server;
 
+import java.io.IOException;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,7 +21,12 @@ public class ServerController {
             @Override
             public void handle(ActionEvent event) {
                 Integer port = new Integer(view.txtPort.getText());
-                model.startServerSocket(port);
+                try {
+					model.startServerSocket(port);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
                
             }
             
